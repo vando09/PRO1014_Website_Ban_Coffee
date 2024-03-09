@@ -1,0 +1,13 @@
+.menu-footer {
+    ul{
+
+    }
+    li{
+       
+        a{
+            &:hover{
+                color: $primary;
+            }
+        }
+    }
+}
