@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-12 col-lg-8">
 				<div class="box-img">
-					<img src="../learning/assets/imges/CFS-800x800.jpg" alt="">
+					<img src="../client/assets/images/CFS-800x800.jpg" alt="">
 				</div>
 			</div>
 			<div class="col-12 col-lg-4">
