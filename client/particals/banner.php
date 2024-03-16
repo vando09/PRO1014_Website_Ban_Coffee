@@ -6,7 +6,7 @@
 								<h1>Coffee <span clsas="d-block">Shop</span></h1>
 								<p class="mb-4"> KHÔNG GIAN CÀ PHÊ NĂNG LƯỢNG – CÀ PHÊ ĐỔI ĐỜI
 
-								<p><a href="/client/product.php" class="btn btn-secondary me-2">Xem ngay</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+								<p><a href="/client/product.php" class="btn btn-secondary me-2">Xem ngay</a><a href="#" class="btn btn-white-outline">Khám phá</a></p>
 							</div>
 						</div>
 						<div class="col-lg-7">
