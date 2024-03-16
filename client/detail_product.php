@@ -7,8 +7,8 @@
 		<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
 			aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Library</li>
+				<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Thư viện</li>
 			</ol>
 		</nav>
 
@@ -36,12 +36,12 @@
 					<span>GIÁ BÁN: 29.000 vnđ</span>
 				</div>
 				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">Email address</label>
+					<label for="exampleFormControlInput1" class="form-label">Địa chỉ email</label>
 					<input type="email" class="form-control" id="exampleFormControlInput1"
-						placeholder="name@example.com">
+						placeholder="ten@fpt.edu.vn">
 				</div>
 				<div class="mb-3">
-					<label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+					<label for="exampleFormControlTextarea1" class="form-label">Soạn văn bản</label>
 					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 				</div>
 			</div>
@@ -56,16 +56,16 @@
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-				type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+				type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Hồ sơ</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
-				type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+				type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Liên hệ</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
 				type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"
-				disabled>Disabled</button>
+				disabled>Tần tật</button>
 		</li>
 	</ul>
 	<div class="tab-content" id="myTabContent">
