@@ -10,14 +10,6 @@
 (function ($) {
   'use strict'
 
-  setTimeout(function () {
-    if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
-      localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
-      // eslint-disable-next-line no-alert
-      alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
-    }
-  }, 1000)
-
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
@@ -94,18 +86,7 @@
   var $header_fixed_container = $('<div />', { class: 'mb-1' }).append($header_fixed_checkbox).append('<span>Fixed</span>')
   $container.append($header_fixed_container)
 
-  var $dropdown_legacy_offset_checkbox = $('<input />', {
-    type: 'checkbox',
-    value: 1,
-    checked: $('.main-header').hasClass('dropdown-legacy'),
-    class: 'mr-1'
-  }).on('click', function () {
-    if ($(this).is(':checked')) {
-      $('.main-header').addClass('dropdown-legacy')
-    } else {
-      $('.main-header').removeClass('dropdown-legacy')
-    }
-  })
+  
   var $dropdown_legacy_offset_container = $('<div />', { class: 'mb-1' }).append($dropdown_legacy_offset_checkbox).append('<span>Dropdown Legacy Offset</span>')
   $container.append($dropdown_legacy_offset_container)
 
@@ -143,27 +124,6 @@
   var $sidebar_collapsed_container = $('<div />', { class: 'mb-1' }).append($sidebar_collapsed_checkbox).append('<span>Collapsed</span>')
   $container.append($sidebar_collapsed_container)
 
-  $(document).on('collapsed.lte.pushmenu', '[data-widget="pushmenu"]', function () {
-    $sidebar_collapsed_checkbox.prop('checked', true)
-  })
-  $(document).on('shown.lte.pushmenu', '[data-widget="pushmenu"]', function () {
-    $sidebar_collapsed_checkbox.prop('checked', false)
-  })
-
-  var $sidebar_fixed_checkbox = $('<input />', {
-    type: 'checkbox',
-    value: 1,
-    checked: $('body').hasClass('layout-fixed'),
-    class: 'mr-1'
-  }).on('click', function () {
-    if ($(this).is(':checked')) {
-      $('body').addClass('layout-fixed')
-      $(window).trigger('resize')
-    } else {
-      $('body').removeClass('layout-fixed')
-      $(window).trigger('resize')
-    }
-  })
   var $sidebar_fixed_container = $('<div />', { class: 'mb-1' }).append($sidebar_fixed_checkbox).append('<span>Fixed</span>')
   $container.append($sidebar_fixed_container)
 
