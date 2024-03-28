@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
+        <h2 class="card-title">Danh sách sản phẩm</h2>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">stt
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Browser: activate to sort column ascending">Tên sản phẩm</th>
@@ -38,36 +38,39 @@
                         <td>1</td>
                         <td>Sản phẩm A</td>
                         <td class="product-thumbnail">
-                        <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25 ">
-                          </td>
+                            <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25 ">
+                        </td>
                         <td>100,000</td>
                         <td>80,000</td>
                         <td>2024-03-27</td>
                         <td>Mô tả danh mục A</td>
                         <td>
-                            
-                            <a href="admin?act=product&page=edit" class="btn btn-warning"> <i class="fas fa-pencil-alt"></i></a href="admin?act=product&page=edit">
-                            <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a href="admin?act=product&page=edit">
+
+                            <a href="admin?act=product&page=edit" class="btn btn-warning"> <i
+                                    class="fas fa-pencil-alt"></i></a href="admin?act=product&page=edit">
+                            <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a
+                                href="admin?act=product&page=edit">
                         </td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Sản phẩm B</td>
                         <td class="product-thumbnail ">
-                        <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25">
-                          </td>
+                            <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25">
+                        </td>
                         <td>150,000</td>
                         <td>120,000</td>
                         <td>2024-03-26</td>
                         <td>Mô tả danh mục B</td>
                         <td>
-                 
+
                             <a href="admin?act=product&page=edit" class="btn btn-warning"> <i class="fas fa-pencil-alt">
                                 </i></a href="admin?act=product&page=edit">
-                            <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a href="admin?act=product&page=edit">
+                            <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a
+                                href="admin?act=product&page=edit">
                         </td>
                     </tr>
-                  
+
                 </tbody>
 
 
