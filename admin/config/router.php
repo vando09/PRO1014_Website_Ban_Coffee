@@ -81,9 +81,29 @@ class Product
 
 
                 case "order":
-                    echo "Load order";
-                    break;
+                    $page = $_GET['page'] ?? '';
+                    $id = $_GET['id'] ?? '';
 
+                    if (!empty($page) && $page == 'add') {
+                        require "modules/order/add.php";
+                    } else if (!empty($page) && $page == 'edit') {
+                        if (sizeof($_POST) === 0) {
+                            // Hiển thị giao diện chỉnh sửa
+                            require "modules/order/update.php";
+                        } else {
+                            // Sửa dữ liệu
+                            // Xử lý dữ liệu được gửi đi qua $_POST
+                        }
+                    } else if (!empty($page) && $page == 'delete') {
+                        // Xóa dữ liệu
+                        echo "Delete action";
+                    } else {
+                        require "modules/order/list.php";
+                    }
+                    break;
+                    case "statistic":
+                        
+                        break;
 
                 default:
                     echo "404";
