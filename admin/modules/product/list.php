@@ -1,116 +1,78 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
+        <h2 class="card-title">Danh sách sản phẩm</h2>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
            
 
-                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline collapsed"
-                        aria-describedby="example1_info">
-                        <thead>
-                            <tr>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                    colspan="1" aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending">Rendering engine
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending">Browser</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="display: none;">
-                                    Platform(s)</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="display: none;">Engine version</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="display: none;">CSS
-                                    grade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd">
-                                <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                <td>Firefox 1.0</td>
-                                <td style="display: none;">Win 98+ / OSX.2+</td>
-                                <td style="display: none;">1.7</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                <td>Firefox 1.5</td>
-                                <td style="display: none;">Win 98+ / OSX.2+</td>
-                                <td style="display: none;">1.8</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                <td>Firefox 2.0</td>
-                                <td style="display: none;">Win 98+ / OSX.2+</td>
-                                <td style="display: none;">1.8</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                <td>Firefox 3.0</td>
-                                <td style="display: none;">Win 2k+ / OSX.3+</td>
-                                <td style="display: none;">1.9</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1 dtr-control">Gecko</td>
-                                <td>Camino 1.0</td>
-                                <td style="display: none;">OSX.2+</td>
-                                <td style="display: none;">1.8</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="sorting_1 dtr-control">Gecko</td>
-                                <td>Camino 1.5</td>
-                                <td style="display: none;">OSX.3+</td>
-                                <td style="display: none;">1.8</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1 dtr-control">Gecko</td>
-                                <td>Netscape 7.2</td>
-                                <td style="display: none;">Win 95+ / Mac OS 8.6-9.2</td>
-                                <td style="display: none;">1.7</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="sorting_1 dtr-control">Gecko</td>
-                                <td>Netscape Browser 8</td>
-                                <td style="display: none;">Win 98SE+</td>
-                                <td style="display: none;">1.7</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1 dtr-control">Gecko</td>
-                                <td>Netscape Navigator 9</td>
-                                <td style="display: none;">Win 98+ / OSX.2+</td>
-                                <td style="display: none;">1.8</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="sorting_1 dtr-control">Gecko</td>
-                                <td>Mozilla 1.0</td>
-                                <td style="display: none;">Win 95+ / OSX.1+</td>
-                                <td style="display: none;">1</td>
-                                <td style="display: none;">A</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">Rendering engine</th>
-                                <th rowspan="1" colspan="1">Browser</th>
-                                <th rowspan="1" colspan="1" style="display: none;">Platform(s)</th>
-                                <th rowspan="1" colspan="1" style="display: none;">Engine version</th>
-                                <th rowspan="1" colspan="1" style="display: none;">CSS grade</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-               
+            <table id="example1" class="table table-bordered table-striped dataTable dtr-inline collapsed"
+                aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">stt
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Browser: activate to sort column ascending">Tên sản phẩm</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Platform(s): activate to sort column ascending" style="display: none;">Hình ảnh
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Engine version: activate to sort column ascending" style="display: none;">Giá
+                            gốc</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="display: none;">Giá khuyến
+                            mãi</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Ngày tạo: activate to sort column ascending">Ngày tạo</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Mô tả danh mục: activate to sort column ascending">Mô tả danh mục</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Hành động: activate to sort column ascending">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Sản phẩm A</td>
+                        <td class="product-thumbnail">
+                        <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25 ">
+                          </td>
+                        <td>100,000</td>
+                        <td>80,000</td>
+                        <td>2024-03-27</td>
+                        <td>Mô tả danh mục A</td>
+                        <td>
+                            
+                            <a href="admin?act=product&page=edit" class="btn btn-warning"> <i class="fas fa-pencil-alt"></i></a href="admin?act=product&page=edit">
+                            <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a href="admin?act=product&page=edit">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sản phẩm B</td>
+                        <td class="product-thumbnail ">
+                        <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25">
+                          </td>
+                        <td>150,000</td>
+                        <td>120,000</td>
+                        <td>2024-03-26</td>
+                        <td>Mô tả danh mục B</td>
+                        <td>
+                 
+                            <a href="admin?act=product&page=edit" class="btn btn-warning"> <i class="fas fa-pencil-alt">
+                                </i></a href="admin?act=product&page=edit">
+                            <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a href="admin?act=product&page=edit">
+                        </td>
+                    </tr>
+                  
+                </tbody>
+
+
+            </table>
+
         </div>
     </div>
     <!-- /.card-body -->
