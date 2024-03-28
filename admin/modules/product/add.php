@@ -1,106 +1,61 @@
 <?php
-$isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === 'edit' ? true : false;
+$isEdit = isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] === 'edit' ? true : false;
 ?>
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-                <!-- jquery validation -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <?= $isEdit ? "Sửa" : "Thêm" ?>
-                            sản phẩm
-                        </h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form id="quickForm" novalidate="novalidate">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-xl-9">
-                                    <div class="form-group">
-                                        <label for="product_name">Tên sản phẩm </label>
-                                        <input type="product_name" name="product_name" class="form-control"
-                                            id="product_name" placeholder="Nhập tên sản phẩm" fdprocessedid="izyqd7">
-                                    </div>
+<!DOCTYPE html>
+<html lang="en">
 
-                                    <div class="form-group">
-                                        <label for="price">Mô tả sản phẩm</label>
-                                        <textarea id="summernote" placeholder="Nhập mô tả sản phẩm"
-                                            style="display: none;">
-              </textarea>
-                                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm mới sản phẩm</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-                                    <div class="card card-info">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Horizontal Form</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form class="form-horizontal">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-xl-6">
-                                                        <div class="form-group row">
-                                                            <label for="price" class="col-sm-4 col-form-label">Giá
-                                                                gốc</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="price" placeholder="Nhập giá gốc"
-                                                                    fdprocessedid="nar7c">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6">
-                                                        <div class="form-group row">
-                                                            <label for="sale" class="col-sm-4 col-form-label">Giá khuyến
-                                                                mãi</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="sale" placeholder="Nhập giá khuyến mãi"
-                                                                    fdprocessedid="r33cywo">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /.card-footer -->
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3">
-                                        <!-- /.form-group -->
-                                        <div class="form-group">
-                                            <label>Disabled Result</label>
-                                            <select class="form-control select2" style="width: 100%;">
-                                                <option selected="selected">Alabama</option>
-                                                <option>Alaska</option>
-                                                <option disabled="disabled">California (disabled)</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
-                                            </select>
-                                        </div>
-                                        <!-- /.form-group -->
-                                 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary" fdprocessedid="8yo73">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.card -->
+<body>
+
+    <div class="container mt-5" style="margin-left: 100px;">
+        <h2 class="mb-4">Thêm mới sản phẩm</h2>
+
+        <form method="post" enctype="multipart/form-data" onsubmit="return validateProduct()">
+            <div class="form-group">
+                <label for="name">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <span id="nameError" style="color: red;"></span>
             </div>
-            <!--/.col (left) -->
-            <!-- right column -->
-            
-            <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
-</section>
+
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                <span id="descriptionError" style="color: red;"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Danh mục sản phẩm</label>
+                <select class="form-control" id="category" name="category">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Giá</label>
+                <input type="text" class="form-control" id="price" name="price">
+                <span id="priceError" style="color: red;"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Hình ảnh</label>
+                <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                <span id="imageError" style="color: red;"></span>
+            </div>
+
+            <a href="index.php?act=listproducts" type="button" class="btn btn-danger">Hủy</a>
+            <button class="btn btn-primary" name="addProduct">Thêm</button>
+        </form>
+        <script src="/validate/validateproduct.js"></script>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
