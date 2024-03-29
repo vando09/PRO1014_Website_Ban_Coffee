@@ -15,7 +15,7 @@
       </div>
       <div class="info">
         <a href="#" class="d-block">
-          <!-- <?= $_SESSION['user'] ? $_SESSION['user']['name'] : "Hi, nguyên" ?> -->
+          <?= $_SESSION['user'] ? $_SESSION['user']['name'] : "Hi, nguyên" ?>
         </a>
       </div>
     </div>
@@ -75,13 +75,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#.html" class="nav-link">
+              <a href="/admin?act=product&page=add" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm sản phẩm </p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="product.php" class="nav-link">
+              <a href="/admin?act=product&page=list" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách sản phẩm</p>
               </a>
