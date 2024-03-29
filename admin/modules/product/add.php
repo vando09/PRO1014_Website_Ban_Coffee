@@ -1,6 +1,15 @@
 <?php
-$isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === 'edit' ? true : false;
+
+require_once "config/database.php";
+require_once "product.php";
+
+$isEdit = isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] === 'edit' ? true : false;
+
+$addProduct = new Product();
+$addProduct->addProduct();
+
 ?>
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -16,21 +25,20 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" novalidate="novalidate">
+                    <form id="quickForm" action="" method="POST" novalidate="novalidate">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-9">
                                     <div class="form-group">
-                                        <label for="product_name">Tên sản phẩm </label>
-                                        <input type="product_name" name="product_name" class="form-control"
-                                            id="product_name" placeholder="Nhập tên sản phẩm" fdprocessedid="izyqd7">
+                                        <label for="name">Tên sản phẩm </label>
+                                        <input type="text" name="name" class="form-control" id="name"
+                                            placeholder="Nhập tên sản phẩm">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="price">Mô tả sản phẩm</label>
-                                        <textarea id="summernote" placeholder="Nhập mô tả sản phẩm"
-                                            style="display: none;">
-              </textarea>
+                                        <label for="description">Mô tả sản phẩm</label>
+                                        <textarea id="summernote" name="description" placeholder="Nhập mô tả sản phẩm"
+                                            style="display: none;"></textarea>
                                     </div>
 
                                     <div class="card card-info">
@@ -39,68 +47,57 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
                                         </div>
                                         <!-- /.card-header -->
                                         <!-- form start -->
-                                        <form class="form-horizontal">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-xl-6">
-                                                        <div class="form-group row">
-                                                            <label for="price" class="col-sm-4 col-form-label">Giá
-                                                                gốc</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="price" placeholder="Nhập giá gốc"
-                                                                    fdprocessedid="nar7c">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6">
-                                                        <div class="form-group row">
-                                                            <label for="sale" class="col-sm-4 col-form-label">Giá khuyến
-                                                                mãi</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="sale" placeholder="Nhập giá khuyến mãi"
-                                                                    fdprocessedid="r33cywo">
-                                                            </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label for="price" class="col-sm-4 col-form-label">Giá
+                                                            gốc</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" name="price" min="0"
+                                                                class="form-control" id="price"
+                                                                placeholder="Nhập giá gốc">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- /.card-footer -->
-                                        </form>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label for="sale" class="col-sm-4 col-form-label">Giá khuyến
+                                                            mãi</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" min="0" name="sale"
+                                                                class="form-control" id="sale"
+                                                                placeholder="Nhập giá khuyến mãi">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="thumbnail" class="custom-file-input"
+                                                            id="thumbnail">
+                                                        <label class="custom-file-label" for="thumbnail">Choose
+                                                            file</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-3">
-                                        <!-- /.form-group -->
-                                        <div class="form-group">
-                                            <label>Disabled Result</label>
-                                            <select class="form-control select2" style="width: 100%;">
-                                                <option selected="selected">Alabama</option>
-                                                <option>Alaska</option>
-                                                <option disabled="disabled">California (disabled)</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
-                                            </select>
-                                        </div>
-                                        <!-- /.form-group -->
-                                 
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Danh mục sản phẩm</label>
+                                        <select class="form-control select2" style="width: 100%;" name="category_id">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div>
+                                    <!-- /.form-group -->
                                 </div>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
                             </div>
                         </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary" fdprocessedid="8yo73">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.card -->
-            </div>
-            <!--/.col (left) -->
-            <!-- right column -->
-            
-            <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
 </section>
