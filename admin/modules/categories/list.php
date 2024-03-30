@@ -39,72 +39,64 @@
           </div>
         </div>
         <div class="card-body p-0">
-        <table class="table table-striped projects">
-              <thead>
-                <tr>
-                  <th style="width: 1%">
-                    #
-                  </th>
-                  <th style="width: 20%">
-                    Tên danh mục
-                  </th>
-                  <th >
-                    Biểu tượng
-                  </th>
-                  <th style="width: 35%">
-                    Mô tả
-                  </th>
-                  <th style="width: 8%" class="text-center">
-                    Trạng thái
-                  </th>
-                  <th style="width: 20%">
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    #
-                  </td>
-                  <td>
-                    <a>
-                      Cafe truyền thống
-                    </a>
-                    <br />
-                    <small>
-                      Ngày tạo 01.01.2024
-                    </small>
-                  </td>
-                  <td>
+          <table class="table table-striped projects">
+            <thead>
+              <tr>
+                <th style="width: 1%">
+                  #
+                </th>
+                <th style="width: 20%">
+                  Tên danh mục
+                </th>
+                <th>
+                  Biểu tượng
+                </th>
+                <th style="width: 35%">
+                  Mô tả
+                </th>
+                <th style="width: 8%" class="text-center">
+                  Trạng thái
+                </th>
+                <th style="width: 20%">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td>
+                  <a>
+                    Cafe truyền thống
+                  </a>
+                  <br />
+                  <small>
+                    Ngày tạo 01.01.2024
+                  </small>
+                </td>
+                <td>
                   <i class="fa-solid fa-mug-saucer"></i>
-                  </td>
-                  <td class="project_progress">
+                </td>
+                <td class="project_progress">
 
-                    Cà phê truyền thống là thức uống được pha chế từ những hạt cà phê chất lượng cao, thường được pha
-                    theo các phương pháp truyền thống như phin, pha máy hoặc pha tay. Mỗi tách cà phê mang đến hương vị
-                    đặc trưng, thơm ngon và đậm đà, tạo nên sự hấp dẫn và cuốn hút đặc biệt trong nền văn hóa cà phê của
-                    mỗi quốc gia.
-                  </td>
-                  <td class="project-state">
-                    <span class="badge badge-success">Hiển thị</span>
-                  </td>
-                  <td class="project-actions text-right">
-                    
-                    <a class="btn btn-info btn-sm" href="#">
-                      <i class="fas fa-pencil-alt">
-                      </i>
-                      Sửa
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                      <i class="fas fa-trash">
-                      </i>
-                      Xóa
-                    </a>
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
+                  Cà phê truyền thống là thức uống được pha chế từ những hạt cà phê chất lượng cao, thường được pha
+                  theo các phương pháp truyền thống như phin, pha máy hoặc pha tay. Mỗi tách cà phê mang đến hương vị
+                  đặc trưng, thơm ngon và đậm đà, tạo nên sự hấp dẫn và cuốn hút đặc biệt trong nền văn hóa cà phê của
+                  mỗi quốc gia.
+                </td>
+                <td class="project-state">
+                  <span class="badge badge-success">Hiển thị</span>
+                </td>
+                <td>
+                  <a href="admin?act=categories&page=edit" class="btn btn-warning"> <i class="fas fa-pencil-alt">
+                    </i></a href="admin?act=categories&page=edit">
+                  <a href="admin?act=categories&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a href="admin?act=categories&page=edit">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
         </div>
         <!-- /.card-body -->
       </div>

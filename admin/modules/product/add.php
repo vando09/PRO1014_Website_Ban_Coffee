@@ -1,5 +1,5 @@
 <?php
-$isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === 'edit' ? true : false;
+$isEdit = isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] === 'edit' ? true : false;
 ?>
 <section class="content">
     <div class="container-fluid">
@@ -22,14 +22,12 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
                                 <div class="col-xl-9">
                                     <div class="form-group">
                                         <label for="product_name">Tên sản phẩm </label>
-                                        <input type="product_name" name="product_name" class="form-control"
-                                            id="product_name" placeholder="Nhập tên sản phẩm" fdprocessedid="izyqd7">
+                                        <input type="product_name" name="product_name" class="form-control" id="product_name" placeholder="Nhập tên sản phẩm" fdprocessedid="izyqd7">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="price">Mô tả sản phẩm</label>
-                                        <textarea id="summernote" placeholder="Nhập mô tả sản phẩm"
-                                            style="display: none;">
+                                        <textarea id="summernote" placeholder="Nhập mô tả sản phẩm" style="display: none;">
               </textarea>
                                     </div>
 
@@ -47,9 +45,7 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
                                                             <label for="price" class="col-sm-4 col-form-label">Giá
                                                                 gốc</label>
                                                             <div class="col-sm-8">
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="price" placeholder="Nhập giá gốc"
-                                                                    fdprocessedid="nar7c">
+                                                                <input type="number" min="0" class="form-control" id="price" placeholder="Nhập giá gốc" fdprocessedid="nar7c">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -58,9 +54,7 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
                                                             <label for="sale" class="col-sm-4 col-form-label">Giá khuyến
                                                                 mãi</label>
                                                             <div class="col-sm-8">
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="sale" placeholder="Nhập giá khuyến mãi"
-                                                                    fdprocessedid="r33cywo">
+                                                                <input type="number" min="0" class="form-control" id="sale" placeholder="Nhập giá khuyến mãi" fdprocessedid="r33cywo">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -70,21 +64,21 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
                                     </div>
                                 </div>
                                 <div class="col-xl-3">
-                                        <!-- /.form-group -->
-                                        <div class="form-group">
-                                            <label>Disabled Result</label>
-                                            <select class="form-control select2" style="width: 100%;">
-                                                <option selected="selected">Alabama</option>
-                                                <option>Alaska</option>
-                                                <option disabled="disabled">California (disabled)</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
-                                            </select>
-                                        </div>
-                                        <!-- /.form-group -->
-                                 
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Disabled Result</label>
+                                        <select class="form-control select2" style="width: 100%;">
+                                            <option selected="selected">Alabama</option>
+                                            <option>Alaska</option>
+                                            <option disabled="disabled">California (disabled)</option>
+                                            <option>Delaware</option>
+                                            <option>Tennessee</option>
+                                            <option>Texas</option>
+                                            <option>Washington</option>
+                                        </select>
+                                    </div>
+                                    <!-- /.form-group -->
+
                                 </div>
                             </div>
                         </div>
@@ -98,7 +92,7 @@ $isEdit = isset ($_GET['page']) && !empty ($_GET['page']) && $_GET['page'] === '
             </div>
             <!--/.col (left) -->
             <!-- right column -->
-            
+
             <!--/.col (right) -->
         </div>
         <!-- /.row -->
