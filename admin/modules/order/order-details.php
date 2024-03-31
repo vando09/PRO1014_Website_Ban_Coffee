@@ -37,7 +37,7 @@
                         <th scope="col">Số lượng</th>
                         <th scope="col">Đơn giá</th>
                         <th scope="col">Thành tiền</th>
-                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Trạng thái </th>
                     </tr>
                     </thead>
                     <tbody>
