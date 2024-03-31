@@ -1,5 +1,4 @@
 <?php
-
 $act = $_GET['act'] ?? '';
 
 if (!empty($act)) {
@@ -10,14 +9,12 @@ if (!empty($act)) {
             if (!empty($page) && $page == 'add') {
                 require "modules/product/add.php";
             } else if (!empty($page) && $page == 'edit') {
-                require "modules/product/add.php";
+                require "modules/product/edit.php";
                 if (sizeof($_POST) === 0) {
-                    //load giao dien
-                } else {
-                    // sua du lieu 
-                }
+                require "modules/product/list.php";
+                } 
             } else if (!empty($page) && $page == 'delete') {
-                echo "load delete";
+                require "modules/product/delete.php";
             } else {
                 require "modules/product/list.php";
             }
@@ -38,8 +35,8 @@ if (!empty($act)) {
                     // Xử lý dữ liệu được gửi đi qua $_POST
                 }
             } else if (!empty($page) && $page == 'delete') {
-                // Xóa dữ liệu
-                echo "Delete action";
+
+
             } else {
                 require "modules/categories/list.php";
             }
