@@ -2,22 +2,21 @@
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-require "config/database.php";
+require_once "config/database.php";
+require_once "product.php";
 
-$product_list = [];
+$db = new Database();
+$conn = $db->getDatabase();
 
-if (isset($_POST['id']) && trim($_POST['id']) !== '') {
-    $id = $_POST['id'];
-    $sql_product = "SELECT * FROM products WHERE id = ? ";
-    $stmt = $conn->prepare($sql_product);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// Lấy danh sách sản phẩm
+$sql = "SELECT * FROM products";
+$result = mysqli_query($conn, $sql);
 
-    if ($result->num_rows > 0) {
-        $product_list = $result->fetch_all(MYSQLI_ASSOC);
-    } else {
-        echo "No data";
+if ($result && mysqli_num_rows($result) > 0) {
+    $productList = [];
+
+    while ($product = mysqli_fetch_assoc($result)) {
+        $productList[] = $product;
     }
 }
 ?>
@@ -59,61 +58,59 @@ if (isset($_POST['id']) && trim($_POST['id']) !== '') {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($product_list as $product): ?>
+                    <?php
+                    $stt = 1;
+                    foreach ($productList as $product):
+                        ?>
                         <tr>
-                            <td>1</td>
                             <td>
-                                <?php $product["name"] ?>
+                                <?php echo $stt; ?>
+                            </td>
+                            <td>
+                                <?php echo $product["name"]; ?>
                             </td>
                             <td class="product-thumbnail">
-                                <?php $product["thumbnail"] ?>
-                                <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25 ">
+                                <img src="./<?php echo $product["thumbnail"]; ?>" alt="Product Thumbnail"
+                                   class = "h-50 w-50" >
                             </td>
                             <td>
-                                <?php $product["price"] ?>
+                                <?php echo number_format($product["price"], 3); ?> VND
                             </td>
                             <td>
-                                <?php $product["sale"] ?>
+                                <?php echo number_format($product["sale"], 3); ?> VND
                             </td>
                             <td>
-                                <?php $product["created_at"] ?>
+                                <?php echo $product["created_at"]; ?>
                             </td>
                             <td>
-                                <?php $product["description"] ?>
+                                <?php echo $product["description"]; ?>
                             </td>
                             <td>
-                                <?php $product["category_id"] ?>
+                                <?php echo $product["category_id"]; ?>
                             </td>
                             <td>
+                                <form action="/admin/?act=product&page=delete&id=<?php echo $product['id']; ?>"
+                                    method="POST">
+                                    <button type="submit" name="delete" class="btn btn-danger m-2"><i class='fas fa-trash-alt'></i></button>
+                                </form>
+                                <form action="/admin/?act=product&page=edit&id=<?php echo $product['id']; ?>"
+                                    method="POST">
+                                    <button type="submit" name="edit" class="btn btn-warning m-2"><i class='fas fa-pencil-alt'></i></button>
+                                </form>
 
-                                <a href="admin?act=product&page=edit" class="btn btn-warning"> <i
-                                        class="fas fa-pencil-alt"></i></a href="admin?act=product&page=edit">
-                                <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a
-                                    href="admin?act=product&page=edit">
+
+
+
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Sản phẩm B</td>
-                            <td class="product-thumbnail ">
-                                <img src="assets/dist/img/pro_1.jpg" alt="Image" class="img-fluid img-thumbnail h-25 w-25">
-                            </td>
-                            <td>150,000</td>
-                            <td>120,000</td>
-                            <td>2024-03-26</td>
-                            <td>Mô tả danh mục B</td>
-                            <td>
-
-                                <a href="admin?act=product&page=edit" class="btn btn-warning"> <i class="fas fa-pencil-alt">
-                                    </i></a href="admin?act=product&page=edit">
-                                <a href="admin?act=product&page=edit" class="btn btn-danger"> <i class="fa fa-trash"></i></a
-                                    href="admin?act=product&page=edit">
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                        <?php
+                        $stt++;
+                    endforeach;
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
     <!-- /.card-body -->
 </div>
+<!-- /.card -->
