@@ -15,7 +15,7 @@
       </div>
       <div class="info">
         <a href="#" class="d-block">
-          <!-- <?= $_SESSION['user'] ? $_SESSION['user']['name'] : "Hi, nguyên" ?> -->
+          <?= $_SESSION['user'] ? $_SESSION['user']['name'] : "Hi, nguyên" ?>
         </a>
       </div>
     </div>
@@ -46,19 +46,19 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#.html" class="nav-link">
+              <a href="/admin?act=categories&page=add" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm loại hàng</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#2.html" class="nav-link">
+              <a href="/admin?act=categories&page=list" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách loại hàng</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#3.html" class="nav-link">
+              <a href="/admin?act=categories&page=delete" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Loại hàng đã xóa</p>
               </a>
@@ -75,13 +75,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#.html" class="nav-link">
+              <a href="/admin?act=product&page=add" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm sản phẩm </p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="product.php" class="nav-link">
+              <a href="/admin?act=product&page=list" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách sản phẩm</p>
               </a>
@@ -128,6 +128,35 @@
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Quản lý đơn hàng
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin?act=order&page=add" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm đơn hàng</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin?act=order&page=list" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách đơn hàng</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#3.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Đơn hàng đã xóa</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="../admin" class="nav-link ">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Thống kê
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
