@@ -11,7 +11,7 @@ if (!empty($act)) {
             } else if (!empty($page) && $page == 'edit') {
                 require "modules/product/edit.php";
                 if (sizeof($_POST) === 0) {
-                require "modules/product/list.php";
+                // require "modules/product/list.php";
                 } 
             } else if (!empty($page) && $page == 'delete') {
                 require "modules/product/delete.php";
