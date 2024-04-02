@@ -1,4 +1,15 @@
-<?php require "layouts/header.php" ?>
+<?php
+ob_start();
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+require_once "config/database.php";
+require_once "variable.php";
+require "layouts/header.php";
+$db = new Database();
+$conn = $db->getDatabase();
+
+?>
 <!-- Main Sidebar Container -->
 <?php require "layouts/sidebar.php" ?>
 
