@@ -1,4 +1,4 @@
-<?
+<?php
 
 $server = "localhost";
 $username = "root";
@@ -73,7 +73,7 @@ if (session_status() == 0) {
               </tr>
             </thead>
             <tbody>
-              <?
+              <?php
               $select = "SELECT * FROM categories";
               $result = $connect->query($select);
               while ($item = $result->fetch_assoc()) :
@@ -94,7 +94,7 @@ if (session_status() == 0) {
                   </th>
                 </tr>
 
-              <?
+              <?php
               endwhile;
               ?>
             </tbody>
@@ -116,6 +116,6 @@ if (session_status() == 0) {
 
 </html>
 
-<?
+<?php
 $connect->close();
 ?>
