@@ -1,116 +1,121 @@
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Danh mục</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item active">Danh mục</li>
-            </ol>
+<?
+
+$server = "localhost";
+$username = "root";
+$password = "mysql";
+$database = "du_an_1";
+
+
+$connect = new mysqli($server, $username, $password, $database);
+
+if ($connect->connect_error) {
+  echo "ket noi loi";
+  exit();
+}
+
+if (session_status() == 0) {
+  session_start();
+}
+
+
+?>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+  <header>
+    <!-- place navbar here -->
+  </header>
+  <main> <!-- Content Wrapper. Contains page content -->
+    <div class="content">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Danh mục</h1>
+            </div>
           </div>
         </div>
-      </div>
-      <button type="button" class="btn btn-primary">
-        <i class="fa-solid fa-plus me-3"></i>Thêm Danh Mục
-      </button>
-      <!-- /.container-fluid -->
-    </section>
+        <button type="button" class="btn btn-primary">
+          <i class="fa-solid fa-plus me-3"></i>Thêm Danh Mục
+        </button>
+        <!-- /.container-fluid -->
+      </section>
 
-    <!-- Main content -->
-    <section class="content">
+      <!-- Main content -->
+      <div class="col-sm-12 col-xl-12">
+        <div class="bg-light rounded h-100 p-4">
+          <h6 class="mb-12">Bảng loại</h6>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Hình</th>
+                <th scope="col" class="d-flex justify-content-end">
+                  <!-- <a href="index.php?act=category&page=add"><button type="button" class="btn btn-primary m-2">Thêm</button></a> -->
 
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Projects</h3>
+                </th>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body p-0">
-        <table class="table table-striped projects">
-              <thead>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+              $select = "SELECT * FROM categories";
+              $result = $connect->query($select);
+              while ($item = $result->fetch_assoc()) :
+              ?>
                 <tr>
-                  <th style="width: 1%">
-                    #
-                  </th>
-                  <th style="width: 20%">
-                    Tên danh mục
-                  </th>
-                  <th >
-                    Biểu tượng
-                  </th>
-                  <th style="width: 35%">
-                    Mô tả
-                  </th>
-                  <th style="width: 8%" class="text-center">
-                    Trạng thái
-                  </th>
-                  <th style="width: 20%">
+                  <th scope="col"><?= $item['id'] ?></th>
+                  <th scope="col"><?= $item['name'] ?></th>
+                  <th scope="col"><img src="./image/<?= $item['image'] ?>" width="100" height="150"></th>
+                  <th scope="col">
+                    <form action="/admin?act=categories&page=update&id=<?= $item['id'] ?>" method="POST">
+                      <button type="submit" name="update" class="btn btn-primary m-2">Cập nhật</button>
+                    </form>
+
+                    <form action="/admin?act=categories&page=delete&id=<?= $item['id'] ?>" method="POST">
+                      <input type="submit" name="delete" class="btn btn-primary m-2" value="Xóa" />
+                    </form>
+
                   </th>
                 </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    #
-                  </td>
-                  <td>
-                    <a>
-                      Cafe truyền thống
-                    </a>
-                    <br />
-                    <small>
-                      Ngày tạo 01.01.2024
-                    </small>
-                  </td>
-                  <td>
-                  <i class="fa-solid fa-mug-saucer"></i>
-                  </td>
-                  <td class="project_progress">
 
-                    Cà phê truyền thống là thức uống được pha chế từ những hạt cà phê chất lượng cao, thường được pha
-                    theo các phương pháp truyền thống như phin, pha máy hoặc pha tay. Mỗi tách cà phê mang đến hương vị
-                    đặc trưng, thơm ngon và đậm đà, tạo nên sự hấp dẫn và cuốn hút đặc biệt trong nền văn hóa cà phê của
-                    mỗi quốc gia.
-                  </td>
-                  <td class="project-state">
-                    <span class="badge badge-success">Hiển thị</span>
-                  </td>
-                  <td class="project-actions text-right">
-                    
-                    <a class="btn btn-info btn-sm" href="#">
-                      <i class="fas fa-pencil-alt">
-                      </i>
-                      Sửa
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                      <i class="fas fa-trash">
-                      </i>
-                      Xóa
-                    </a>
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
+              <?
+              endwhile;
+              ?>
+            </tbody>
+          </table>
         </div>
-        <!-- /.card-body -->
       </div>
-      <!-- /.card -->
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<?
+$connect->close();
+?>

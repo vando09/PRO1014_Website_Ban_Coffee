@@ -1,76 +1,140 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Thêm danh mục</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="#">Quản lý danh mục</a></li>
-                <li class="breadcrumb-item active">Thêm danh mục</li>
-              </ol>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
 
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Chi tiết danh mục</h3>
+<?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="inputName">Tên danh mục</label>
-                  <input type="text" id="inputName" class="form-control" value="">
-                </div>
-                <div class="form-group">
-                  <label for="inputDescription">Mô tả danh mục</label>
-                  <textarea id="inputDescription" class="form-control"
-                    rows="4">
-                  
-                  </textarea>
-                </div>
-                <div class="form-group">
-                  <label for="inputStatus">Trạng thái</label>
-                  <select id="inputStatus" class="form-control custom-select">
-                    <option disabled>Mặc định</option>
-                    <option>Ẩn</option>
-                    <option selected>Hiển thị</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="inputClientCompany">Biểu tượng</label>
-                  <input type="text" id="inputClientCompany" class="form-control" value="">
-                </div>
+$server = "localhost";
+$username = "root";
+$password = "mysql";
+$database = "du_an_1";
 
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
+$connect = new mysqli($server, $username, $password, $database);
 
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <a href="#" class="btn btn-secondary">Hủy</a>
-            <input type="submit" value="Thêm mới" class="btn btn-success float-right">
-          </div>
-        </div>
-      </section>
-      <!-- /.content -->
+if ($connect->connect_error) {
+    echo "kết nối thất bại";
+    exit();
+}
+
+if (session_status() == 0) {
+    session_start();
+}
+
+if (isset($_POST['addProduct'])) {
+    $nameCat = $_POST['name'];
+    $imageFiles = $_FILES['image'];
+
+    if (empty($nameCat)) {
+        $err_name = "tên danh mục không được bỏ trống";
+    } else if (!preg_match("/^[a-zA-Z ]*$/",$nameCat)) {
+        $err_name = "Tên danh mục chỉ chấp nhận chữ và khoảng trắng.";
+    }
+
+    if (empty($imageFiles['name'][0])) {
+        $err_image = "vui lòng chọn hình ảnh sản phẩm";
+    }
+
+    if (empty($err_name) && empty($err_image)) {
+        $nameCat = $connect->real_escape_string($nameCat);
+
+        $target_dir = "";
+        $target_file = $target_dir . basename($imageFiles["name"][0]);
+
+        if (move_uploaded_file($imageFiles["tmp_name"][0], $target_file)) {
+            $sql = "INSERT INTO categories (name, thumbnail, status) VALUES ('{$nameCat}', '{$target_file}', 1)";
+
+            if ($connect->query($sql) === TRUE) {
+                echo "Thêm thành công";
+            } else {
+                echo "Lỗi: " . $sql . "<br>" . $connect->error;
+            }
+        } else {
+            echo "Lỗi file hình ảnh";
+        }
+        if (empty($err_image) && empty($err_insert)) {
+          header('LOCATION:/admin?act=categories&page=delete&id= ');
+      }
+    }
+}
+
+$connect->close();
+?>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+     <h3>Thêm danh mục</h3>
+    </header>
+    <main>
+      <p id="message" style="color: red;"></p>
+      <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" name="myForm" id="my_form">
+    <div class="form-group">
+        <label for="">Tên danh mục:</label>
+        <input type="text" class="form-control"  name="name" autocomplete="off" required>
+        <?php if (isset($err_name)): ?>
+            <span class="text-danger"><?php echo $err_name; ?></span>
+        <?php endif; ?>
     </div>
-    <!-- /.content-wrapper -->
+
+    <div class="form-group">
+        <label for="image">Hình ảnh:</label>
+        <input type="file" class="form-control-file" id="image" name="image[]" multiple required>
+        <?php if (isset($err_image)): ?>
+            <span class="text-danger"><?php echo $err_image; ?></span>
+        <?php endif; ?>
+    </div>
+    <button type="submit" name="addProduct"class="btn btn-primary">Thêm</button>
+</form>
+</main>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let myForm = document.forms.myForm;
+      let message =document.getElementById('message');
+
+      myForm.onsubmit =function (){
+        if(myForm.name.valua ==""){
+          message.innerHTML = "Vui lòng nhập tên danh mục"
+          return false;
+        } else {
+          message.innerHTML = "";
+          return true;
+        }
+      }
+    </script>
+  </body>
+</html>
+
+

@@ -1,4 +1,12 @@
-<?php require "layouts/header.php" ?>
+<?php
+ob_start();
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+require "layouts/header.php";
+
+
+?>
 <!-- Main Sidebar Container -->
 <?php require "layouts/sidebar.php" ?>
 
@@ -10,7 +18,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Dashboard</h1>
+          <!-- <h1 class="m-0">Trang chủ</h1> -->
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
