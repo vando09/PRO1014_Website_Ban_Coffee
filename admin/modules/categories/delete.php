@@ -20,12 +20,10 @@ if ($result) {
     unlink("");
 
 
-    $sql = "DELETE FROM categories_status WHERE category_id = $id";
+    $sql = "DELETE FROM categories WHERE id = $id";
     $result = $connect->query($sql);
 
 
-    $sql = "DELETE FROM categories_name WHERE category_id = $id";
-    $result = $connect->query($sql);
 
     header("Location:/admin?act=categories&page=list");
 } else {
