@@ -25,14 +25,17 @@ if (!empty($act)) {
             $id = $_GET['id'] ?? '';
 
             if (!empty($page) && $page == 'add') {
-                require "modules/categories/add.php";
-            } else if (!empty($page) && $page == 'edit') {
                 if (sizeof($_POST) === 0) {
-                    // Hiển thị giao diện chỉnh sửa
-                    require "modules/categories/edit.php";
+                    require "modules/categories/add.php";
                 } else {
-                    // Sửa dữ liệu
-                    // Xử lý dữ liệu được gửi đi qua $_POST
+                    //code xử lý ở đây
+                    require "modules/categories/add.php";
+                }
+            } else if (!empty($page) && $page == 'list') {
+                require "modules/categories/list.php";
+            } else if (!empty($page) && $page == 'update') {
+                if (sizeof($_POST) === 0) {
+                    require "modules/categories/update.php";
                 }
             } else if (!empty($page) && $page == 'delete') {
 
