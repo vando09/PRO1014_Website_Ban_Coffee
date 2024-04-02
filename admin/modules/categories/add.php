@@ -14,17 +14,17 @@ if (isset($_POST['addProduct'])) {
   }
 
   if (empty($err_name) && empty($err_image)) {
-    $nameCat = $connect->real_escape_string($nameCat);
+    $nameCat = $conn->real_escape_string($nameCat);
 
     $target_file = UPLOAD_URL. '/' . basename($imageFiles["name"]);
 
     if (move_uploaded_file($imageFiles["tmp_name"], $target_file)) {
       $sql = "INSERT INTO categories (name, thumbnail, status) VALUES ('{$nameCat}', '{$target_file}', 1)";
 
-      if ($connect->query($sql) === TRUE) {
+      if ($conn->query($sql) === TRUE) {
         echo "Thêm thành công";
       } else {
-        echo "Lỗi: " . $sql . "<br>" . $connect->error;
+        echo "Lỗi: " . $sql . "<br>" . $conn->error;
       }
     } else {
       echo "Lỗi file hình ảnh";
@@ -36,7 +36,7 @@ if (isset($_POST['addProduct'])) {
   }
 }
 
-$connect->close();
+
 ?>
 <form method="post" action="" enctype="multipart/form-data">
   <div class="form-group">
