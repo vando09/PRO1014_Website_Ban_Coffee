@@ -27,7 +27,7 @@ if ($result) {
     $sql = "DELETE FROM categories_name WHERE category_id = $id";
     $result = $connect->query($sql);
 
-    header("Location: categories.php");
+    header("Location:/admin?act=categories&page=list");
 } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
 }
