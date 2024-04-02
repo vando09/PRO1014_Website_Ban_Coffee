@@ -38,9 +38,9 @@ if (!empty($act)) {
                 }
             } else if (!empty($page) && $page == 'list') {
                 require "modules/categories/list.php";
-            } else if (!empty($page) && $page == 'edit') {
+            } else if (!empty($page) && $page == 'update') {
                 if (sizeof($_POST) === 0) {
-                    require "modules/categories/edit.php";
+                    require "modules/categories/update.php";
                 }
             } else if (!empty($page) && $page == 'delete') {
                 // Xóa dữ liệu
