@@ -70,8 +70,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                 <?php echo $product["name"]; ?>
                             </td>
                             <td class="product-thumbnail">
-                                <img src="./<?php echo $product["thumbnail"]; ?>" alt="Product Thumbnail"
-                                   class = "h-50 w-50" >
+                                <img src="./<?php echo $product["thumbnail"]; ?>" alt="Product Thumbnail" class="h-50 w-50">
                             </td>
                             <td>
                                 <?php echo number_format($product["price"], 3); ?> VND
@@ -91,13 +90,12 @@ if ($result && mysqli_num_rows($result) > 0) {
                             <td>
                                 <form action="/admin/?act=product&page=delete&id=<?php echo $product['id']; ?>"
                                     method="POST">
-                                    <button type="submit" name="delete" class="btn btn-danger m-2"><i class='fas fa-trash-alt'></i></button>
+                                    <button type="submit" name="delete" class="btn btn-danger m-2"><i
+                                            class='fas fa-trash-alt'></i></button>
                                 </form>
-                                <form action="/admin/?act=product&page=edit&id=<?php echo $product['id']; ?>"
-                                    method="POST">
-                                    <button type="submit" name="edit" class="btn btn-warning m-2"><i class='fas fa-pencil-alt'></i></button>
-                                </form>
-
+                                <a type="submit" name="edit"
+                                    href="/admin/?act=product&page=edit&id=<?php echo $product['id']; ?>"
+                                    class="btn btn-warning m-2"><i class='fas fa-pencil-alt'></i></a>
 
 
 

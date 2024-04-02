@@ -7,17 +7,21 @@ require_once "variable.php";
 
 $db = new Database();
 $conn = $db->getDatabase();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
-    // Lấy id của sản phẩm cần sửa
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET["id"];
     $sql = "SELECT * FROM products WHERE id ='$id'";
     $result = mysqli_query($conn, $sql);
-    
-if (!$result) {
-    echo "Lỗi kết nối CSDL: " . mysqli_error($conn);
-}
     $editProduct = mysqli_fetch_assoc($result);
+
+    if (!$result) {
+        echo "Lỗi kết nối CSDL: " . mysqli_error($conn);
+    }
+
+} else {
+    header("Location: list.php");
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Lấy id của sản phẩm cần sửa
     if (isset($_POST['name'], $_POST['price'], $_POST['sale'], $_POST['description'], $_POST['category_id'], $_FILES['thumbnail'])) {
         $name = $_POST['name'];
         $price = $_POST['price'];
@@ -60,7 +64,7 @@ if (!$result) {
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="" method="POST" novalidate="novalidate">
+                    <form id="quickForm" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
 
                         <div class="card-body">
                             <div class="row">
@@ -73,13 +77,12 @@ if (!$result) {
 
                                     <div class="form-group">
                                         <label for="description">Mô tả sản phẩm</label>
-                                        <textarea id="summernote" name="description" placeholder="Nhập mô tả sản phẩm"
-                                            style="display: none;"
-                                            value="<?php echo $editProduct['description']; ?>"></textarea>
+                                        <textarea id="summernote" name="description"
+                                            placeholder="Nhập mô tả sản phẩm"><?php echo $editProduct['description']; ?></textarea>
                                     </div>
 
                                     <div class="card card-info">
-                                      
+
                                         <!-- /.card-header -->
                                         <!-- form start -->
                                         <div class="card-body">
@@ -102,7 +105,7 @@ if (!$result) {
                                                             mãi</label>
                                                         <div class="col-sm-8">
                                                             <input type="number" min="0"
-                                                                value="<?php echo $editProduct['sale']; ?>" name="price"
+                                                                value="<?php echo $editProduct['sale']; ?>" name="sale"
                                                                 class="form-control" id="sale"
                                                                 placeholder="Nhập giá khuyến mãi">
                                                         </div>
