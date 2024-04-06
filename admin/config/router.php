@@ -1,5 +1,4 @@
 <?php
-
 $act = $_GET['act'] ?? '';
 
 if (!empty($act)) {
@@ -7,20 +6,15 @@ if (!empty($act)) {
         case "product":
             $page = $_GET['page'] ?? '';
             $id = $_GET['id'] ?? '';
-
             if (!empty($page) && $page == 'add') {
                 require "modules/product/add.php";
             } else if (!empty($page) && $page == 'edit') {
+                require "modules/product/edit.php";
                 if (sizeof($_POST) === 0) {
-                    // Hiển thị giao diện chỉnh sửa
-                    require "modules/product/add.php";
-                } else {
-                    // Sửa dữ liệu
-                    // Xử lý dữ liệu được gửi đi qua $_POST
-                }
+                // require "modules/product/list.php";
+                } 
             } else if (!empty($page) && $page == 'delete') {
-                // Xóa dữ liệu
-                echo "Delete action";
+                require "modules/product/delete.php";
             } else {
                 require "modules/product/list.php";
             }
@@ -43,17 +37,11 @@ if (!empty($act)) {
                     require "modules/categories/update.php";
                 }
             } else if (!empty($page) && $page == 'delete') {
-                // Xóa dữ liệu
-                if (sizeof($_POST) === 0) {
-                    require "modules/categories/delete.php";
-                }
+
+
             } else {
                 require "modules/categories/list.php";
             }
-            break;
-
-        case "blog":
-            echo "Load blog";
             break;
 
         case "blog":
@@ -113,9 +101,4 @@ if (!empty($act)) {
             echo "404";
             break;
     }
-} else {
-    // Xử lý trường hợp không có hành động
-    // Hiển thị trang chủ hoặc trang mặc định
-
-
 }
