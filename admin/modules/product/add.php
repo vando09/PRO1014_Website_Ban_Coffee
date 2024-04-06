@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>';
     }
 }
+var_dump($stmt);
 ?>
 
 <section class="content">
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <!-- <?= $isEdit ? "Sửa" : "Thêm" ?> -->
+                           
                            Thêm sản phẩm
                         </h3>
                     </div>
@@ -102,15 +103,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
                                 <div class="col-xl-3">
-                                    <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Danh mục sản phẩm</label>
                                         <select class="form-control select2" style="width: 100%;" name="category_id">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
+                                            <?php
+                                            $sql = "SELECT id, name FROM categories";
+                                            $result = $conn->query($sql);
+                                            if ($result->num_rows > 0) {
+                                                echo '<option value="">Chọn danh mục</option>';
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+                                                }
+                                            } else {
+                                                echo '<option value="">Không có danh mục nào</option>';
+                                            }
+                                            ?>
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->
                                 </div>
                                 <button type="submit" class="btn btn-primary">Thêm</button>
                             </div>
