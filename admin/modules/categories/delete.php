@@ -39,7 +39,7 @@ if (isset($_POST['confirm_delete'])) {
         $thumbnail = $row['thumbnail'];
         unlink($thumbnail);
 
-    $sql = "DELETE FROM name WHERE category_id = $id";
+    $sql = "DELETE FROM categories_name WHERE category_id = $id";
     $result = $conn->query($sql);
 
     header("Location:/admin/?act=categories&page=list");
