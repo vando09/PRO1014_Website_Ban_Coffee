@@ -37,14 +37,14 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="../index.php">Trang chủ</a>
 					</li>
-					<li><a class="nav-link" href="/client/product.php">Sản phẩm</a></li>
-					<li><a class="nav-link" href="about.html">Về chúng tôi</a></li>
-					<li><a class="nav-link" href="/client/blog.php">Bài viết</a></li>
+					<li><a class="nav-link" href="/client/single_product.php">Sản phẩm</a></li>
+					<li><a class="nav-link" href="/client/abouts.php">Về chúng tôi</a></li>
+					<!-- <li><a class="nav-link" href="/client/blog.php">Bài viết</a></li> -->
 					<li><a class="nav-link" href="/client/contact.php">Liên hệ </a></li>
 				</ul>
 
 				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-					<li><a class="nav-link" href="#"><img src="../client/assets/images/user.svg"></a></li>
+					<li><a class="nav-link" href="/client/sign_in.php"><img src="../client/assets/images/user.svg"></a></li>
 					<li><a class="nav-link" href="/client/cart.php"><img src="../client/assets/images/cart.svg"></a>
 					</li>
 				</ul>
