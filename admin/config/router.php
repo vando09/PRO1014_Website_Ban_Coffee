@@ -36,19 +36,15 @@ if (!empty($act)) {
             } else if (!empty($page) && $page == 'update') {
                 if (sizeof($_POST) === 0) {
                     require "modules/categories/update.php";
+                }else {
+                    
                 }
             } else if (!empty($page) && $page == 'delete') {
-
-
+                require "modules/categories/delete.php";
             } else {
                 require "modules/categories/list.php";
             }
             break;
-
-        case "blog":
-            echo "Load blog";
-            break;
-
 
         case "accounts":
             $page = $_GET['page'] ?? '';
@@ -61,12 +57,11 @@ if (!empty($act)) {
                     // Hiển thị giao diện chỉnh sửa
                     require "modules/accounts/edit.php";
                 } else {
-                    // Sửa dữ liệu
-                    // Xử lý dữ liệu được gửi đi qua $_POST
+                    require "modules/accounts/edit.php";
+                    
                 }
             } else if (!empty($page) && $page == 'delete') {
-                // Xóa dữ liệu
-                echo "Delete action";
+                require "modules/accounts/delete.php";
             } else {
                 require "modules/accounts/list.php";
             }
