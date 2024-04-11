@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role = $_POST['role'];
         $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
         move_uploaded_file(
-          $_FILES['thumbnail']['tmp_name'],
-          UPLOAD_URL . time() . $_FILES['thumbnail']['name']
+            $_FILES['thumbnail']['tmp_name'],
+            UPLOAD_URL . time() . $_FILES['thumbnail']['name']
         );
 
         $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, password = ?, address = ?, role = ?, thumbnail = ? WHERE id = ?");
@@ -62,33 +62,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Tên người dùng</label>
-                                        <input type="text" value="<?php echo isset($editUser['name']) ? $editUser['name'] : ''; ?>" name="name"
-                                            class="form-control" id="name" placeholder="Nhập tên người dùng">
+                                        <input type="text"
+                                            value="<?php echo isset($editUser['name']) ? $editUser['name'] : ''; ?>"
+                                            name="name" class="form-control" id="name"
+                                            placeholder="Nhập tên người dùng">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" value="<?php echo isset($editUser['email']) ? $editUser['email'] : ''; ?>" name="email"
-                                            class="form-control" id="email" placeholder="Nhập địa chỉ email">
+                                        <input type="email"
+                                            value="<?php echo isset($editUser['email']) ? $editUser['email'] : ''; ?>"
+                                            name="email" class="form-control" id="email"
+                                            placeholder="Nhập địa chỉ email">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Mật khẩu</label>
-                                        <input type="password" value="<?php echo isset($editUser['password']) ? $editUser['password'] : ''; ?>"
+                                        <input type="password"
+                                            value="<?php echo isset($editUser['password']) ? $editUser['password'] : ''; ?>"
                                             name="password" class="form-control" id="password"
                                             placeholder="Nhập mật khẩu">
                                     </div>
                                     <div class="form-group">
                                         <label for="address">Địa chỉ</label>
-                                        <input type="text" value="<?php echo isset($editUser['address']) ? $editUser['address'] : ''; ?>" name="address"
-                                            class="form-control" id="address" placeholder="Nhập địa chỉ">
+                                        <input type="text"
+                                            value="<?php echo isset($editUser['address']) ? $editUser['address'] : ''; ?>"
+                                            name="address" class="form-control" id="address" placeholder="Nhập địa chỉ">
                                     </div>
                                     <div class="form-group">
                                         <label for="role">Loại tài khoản</label>
                                         <select class="form-control" name="role" id="role">
-                                            <option value="admin" <?php if (isset($editUser['role']) && $editUser['role'] == 'admin')
+                                            <option value="1" <?php if (isset($editUser['role']) && $editUser['role'] == '1')
                                                 echo 'selected'; ?>>
                                                 Admin
                                             </option>
-                                            <option value="user" <?php if (isset($editUser['role']) && $editUser['role'] == 'user')
+                                            <option value="0" <?php if (isset($editUser['role']) && $editUser['role'] == '0')
                                                 echo 'selected'; ?>>
                                                 Khách hàng
                                             </option>
@@ -97,14 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="thumbnail" class="custom-file-input"
-                                                id="thumbnail">
-                                            <label class="custom-file-label" for="thumbnail">Choose
-                                                file</label>
+                                                id="thumbnail"   value="<?php echo isset($editUser['thumbnail']) ? $editUser['thumbnail'] : ''; ?>">
+                                            <label class="custom-file-label" for="thumbnail">Choose file</label>
                                         </div>
+                                        
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
+                                        
                                     </div>
+                                    <img src="<?php echo $editUser['thumbnail']; ?>" alt="Old Thumbnail" width="100" class = "mt-3">
+
                                 </div>
                             </div>
                         </div>
