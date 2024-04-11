@@ -19,7 +19,7 @@ if (isset($_POST['addProduct'])) {
     if (empty($err_name) && empty($err_image)) {
         $nameCat = $conn->real_escape_string($nameCat);
 
-        $target_file = UPLOAD_URL. '/' . basename($imageFiles["name"][0]);
+        $target_file = UPLOAD_URL . '/' . basename($imageFiles["name"][0]);
 
         if (move_uploaded_file($imageFiles["tmp_name"][0], $target_file)) {
             $sql = "INSERT INTO categories (name, thumbnail, status) VALUES ('{$nameCat}', '{$target_file}', 1)";
@@ -29,30 +29,50 @@ if (isset($_POST['addProduct'])) {
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $conn->error;
             }
+
         } else {
             echo "Lỗi file hình ảnh";
         }
+        
+        header("Location:/admin/?act=categories&page=list");
     }
 }
 
 $conn->close();
 ?>
 
-<form method="post" action="" enctype="multipart/form-data" id="myForm">
-  <div class="form-group">
-    <label for="name">Tên danh mục:</label>
-    <input type="text" class="form-control" id="name" name="name" required>
-    <?php if (isset($err_name)) : ?>
-      <span class="text-danger"><?php echo $err_name; ?></span>
-    <?php endif; ?>
-  </div>
-  <div class="form-group">
-    <label for="image">Hình ảnh:</label>
-    <input type="file" class="form-control-file" id="image" name="image[]" multiple required>
-    <?php if (isset($err_image)) : ?>
-      <span class="text-danger"><?php echo $err_image; ?></span>
-    <?php endif; ?>
-  </div>
-  <button type="submit" name="addProduct" class="btn btn-primary">Thêm</button>
-</form>
-
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Thêm danh mục sản phẩm</h3>
+                    </div>
+                    <form id="quickForm" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-9">
+                                    <div class="form-group"> <label for="name">Tên sản phẩm</label> <input type="text" name="name" class="form-control" id="name" placeholder="Nhập tên sản phẩm"> </div>
+                                    <div class="card card-info">
+                                        <div class="card-body">
+                                            <div class="form-group"> <label for="image">Hình ảnh</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file"> <input type="file" name="image[]" class="custom-file-input" id="image" multiple> <label class="custom-file-label" for="image">Choose file</label> </div>
+                                                    <div class="input-group-append"> <span class="input-group-text">Upload</span> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-xl-3"> <button type="submit" name="addProduct" class="btn btn-primary">Thêm</button> </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
