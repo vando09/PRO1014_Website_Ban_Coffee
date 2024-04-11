@@ -37,6 +37,7 @@ if (!empty($act)) {
                     require "modules/categories/update.php";
                 }
             } else if (!empty($page) && $page == 'delete') {
+                require "modules/categories/delete.php";
 
 
             } else {

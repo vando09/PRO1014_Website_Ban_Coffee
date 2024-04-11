@@ -1,8 +1,7 @@
 <?php
-// Lấy danh sách sản phẩm
-$sql = "SELECT * FROM products";
+$sql = "SELECT p.*, c.name AS category_name FROM products p
+INNER JOIN categories c ON p.category_id = c.id";
 $result = mysqli_query($conn, $sql);
-$productList = [];
 if ($result && mysqli_num_rows($result) > 0) {
     
 
@@ -41,8 +40,6 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Ngày tạo: activate to sort column ascending">Ngày tạo</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Mô tả: activate to sort column ascending">Mô tả </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Danh mục: activate to sort column ascending">Danh mục</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Hành động: activate to sort column ascending">Hành động</th>
@@ -65,26 +62,32 @@ if ($result && mysqli_num_rows($result) > 0) {
                                 <img src="./<?php echo $product["thumbnail"]; ?>" alt="Product Thumbnail" class="h-50 w-50">
                             </td>
                             <td>
-                                <?php echo number_format($product["price"], 3); ?> VND
+                                <?php echo number_format($product["price"]); ?> VND
                             </td>
                             <td>
-                                <?php echo number_format($product["sale"], 3); ?> VND
+                                <?php echo number_format($product["sale"]); ?> VND
                             </td>
                             <td>
                                 <?php echo $product["created_at"]; ?>
                             </td>
                             <td>
-                                <?php echo $product["description"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $product["category_id"]; ?>
+                                <?php
+                                $categoryId = $product["category_id"];
+                                $sql = "SELECT name FROM categories WHERE id = $categoryId";
+                                $result = $conn->query($sql);
+                                if ($result && $result->num_rows > 0) {
+                                    $category = $result->fetch_assoc();
+                                    echo $category["name"];
+                                }
+                                ?>
                             </td>
                             <td>
                                 <form action="/admin/?act=product&page=delete&id=<?php echo $product['id']; ?>"
-                                    method="POST">
+                                    method="POST" class="delete-form" id="deleteForm">
                                     <button type="submit" name="delete" class="btn btn-danger m-2"><i
                                             class='fas fa-trash-alt'></i></button>
                                 </form>
+
                                 <a type="submit" name="edit"
                                     href="/admin/?act=product&page=edit&id=<?php echo $product['id']; ?>"
                                     class="btn btn-warning m-2"><i class='fas fa-pencil-alt'></i></a>
