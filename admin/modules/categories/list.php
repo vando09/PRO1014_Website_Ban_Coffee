@@ -84,10 +84,10 @@ if (session_status() == 0) {
                   <th scope="col"><img src="<?= $item['thumbnail'] ?>" width="100" height="150"></th>
                   <th scope="col">
                     
-                    <a href="/admin?act=categories&page=update<?= $item['id'] ?>" type="submit" name="update" class="btn btn-primary m-2">Cập nhật</a>
+                    <a href="/admin/?act=categories&page=update<?= $item['id'] ?>" type="submit" name="update" class="btn btn-primary m-2">Cập nhật</a>
 
 
-                    <form action="/admin?act=categories&page=delete&id=<?= $item['id'] ?>" method="POST">
+                    <form action="/admin/?act=categories&page=delete&id=<?= $item['id'] ?>" method="POST">
                       <input type="submit" name="delete" class="btn btn-primary m-2" value="Xóa" />
                     </form>
 

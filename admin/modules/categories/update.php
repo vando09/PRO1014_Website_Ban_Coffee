@@ -1,41 +1,33 @@
 <?php
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+  $select = "SELECT * FROM categories WHERE id = $id";
+  $result = $conn->query($select);
+  $item = $result->fetch_assoc();
+}
+if (isset($_POST['update'])) {
+  $nameCat = isset($_POST['name'])? $_POST['name'] : '';
+  $imageFiles = isset($_FILES['image'])? $_FILES['image'] : '';
 
-if (isset($_POST['addProduct'])) {
-    $nameCat = $_POST['name'];
-    $imageFiles = $_FILES['image'];
+  $err_name =!empty($nameCat)? '' : "tên danh mục không được bỏ trống";
+  $err_image =!empty($imageFiles['name'][0])? '' : "vui lòng chọn hình ảnh sản phẩm";
 
-    if (empty($nameCat)) {
-        $err_name = "tên danh mục không được bỏ trống";
+  if (empty($err_name) && empty($err_image)) {
+    $nameCat = $conn->real_escape_string($nameCat);
+
+    $target_file = UPLOAD_URL. '/'. basename($imageFiles["name"][0]);
+
+    if (move_uploaded_file($imageFiles["tmp_name"][0], $target_file)) {
+      $sql = "UPDATE categories SET name = '$nameCat', thumbnail = '$target_file' WHERE id = $id";
+      if ($conn->query($sql) === TRUE) {
+        echo "Sửa danh mục thành công";
+      } else {
+        echo "Lỗi: ". $sql. "<br>". $conn->error;
+      }
     } else {
-        $err_name = "";
+      echo "Lỗi file hình ảnh";
     }
-
-    if (empty($imageFiles['name'][0])) {
-        $err_image = "vui lòng chọn hình ảnh sản phẩm";
-    } else {
-        $err_image = "";
-    }
-
-    if (empty($err_name) && empty($err_image)) {
-        $nameCat = $conn->real_escape_string($nameCat);
-
-        $target_file = UPLOAD_URL . '/' . basename($imageFiles["name"][0]);
-
-        if (move_uploaded_file($imageFiles["tmp_name"][0], $target_file)) {
-            $sql = "INSERT INTO categories (name, thumbnail, status) VALUES ('{$nameCat}', '{$target_file}', 1)";
-
-            if ($conn->query($sql) === TRUE) {
-                echo "Thêm thành công";
-            } else {
-                echo "Lỗi: " . $sql . "<br>" . $conn->error;
-            }
-
-        } else {
-            echo "Lỗi file hình ảnh";
-        }
-        
-        header("Location:/admin/?act=categories&page=list");
-    }
+  }
 }
 
 $conn->close();
@@ -47,7 +39,7 @@ $conn->close();
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Thêm danh mục sản phẩm</h3>
+                        <h3 class="card-title">Sửa danh mục sản phẩm</h3>
                     </div>
                     <form id="quickForm" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
                         <div class="card-body">
@@ -67,7 +59,7 @@ $conn->close();
                                 </div>
                                
                             </div>
-                            <div class="col-xl-3"> <button type="submit" name="addProduct" class="btn btn-primary">Thêm</button> </div>
+                            <div class="col-xl-3"> <button type="submit" name="update" class="btn btn-primary">Sửa</button> </div>
                         </div>
                         
                     </form>
