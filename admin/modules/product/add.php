@@ -4,8 +4,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $sale = $_POST['sale'];
     $description = $_POST['description'];
-    $category_id = $_POST['category_id'];
-
     $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
     move_uploaded_file(
         $_FILES['thumbnail']['tmp_name'],
@@ -13,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     $stmt = $conn->prepare("INSERT INTO products (name, price, sale, thumbnail, description, category_id) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssi", $name, $price, $sale, $thumbnail, $description, $category_id);
+    $stmt->bind_param("sssssi", $name, $price, $sale, $thumbnail, $description, $_POST['category_id']);
+
     if ($stmt->execute()) {
         echo '<div class="alert alert-success" role="alert">
    Thêm sản phẩm thành công!
@@ -36,14 +35,13 @@ var_dump($stmt);
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
-                           
+                            <!-- <?= $isEdit ? "Sửa" : "Thêm" ?> -->
                            Thêm sản phẩm
                         </h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="" method="POST" novalidate="novalidate"
-                        enctype="multipart/form-data">
+                    <form id="quickForm" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-9">
@@ -60,9 +58,6 @@ var_dump($stmt);
                                     </div>
 
                                     <div class="card card-info">
-
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-xl-6">
@@ -121,8 +116,12 @@ var_dump($stmt);
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Thêm</button>
                             </div>
+                            <button type="submit" class="btn btn-primary">Thêm</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

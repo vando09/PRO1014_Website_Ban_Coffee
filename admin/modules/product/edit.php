@@ -1,12 +1,4 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-require_once "config/database.php";
-require_once "variable.php";
-
-$db = new Database();
-$conn = $db->getDatabase();
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET["id"];
     $sql = "SELECT * FROM products WHERE id ='$id'";
@@ -21,7 +13,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     header("Location: list.php");
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Lấy id của sản phẩm cần sửa
     if (isset($_POST['name'], $_POST['price'], $_POST['sale'], $_POST['description'], $_POST['category_id'], $_FILES['thumbnail'])) {
         $name = $_POST['name'];
         $price = $_POST['price'];
@@ -29,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description = $_POST['description'];
         $category_id = $_POST['category_id'];
 
-        $thumbnail = UPLOAD_URL . time() . '_' . $_FILES['thumbnail']['name'];
+        $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
         move_uploaded_file(
             $_FILES['thumbnail']['tmp_name'],
             UPLOAD_URL . time() . $_FILES['thumbnail']['name']
@@ -113,9 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </div>
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                        <input type="file"
-                                                            value="<?php echo $editProduct['thumbnail']; ?>"
-                                                            name="thumbnail" class="custom-file-input" id="thumbnail">
+                                                        <input type="file" value="<?php echo $editProduct['thumbnail']; ?>" name="thumbnail" class="custom-file-input"
+                                                            id="thumbnail">
                                                         <label class="custom-file-label" for="thumbnail">Choose
                                                             file</label>
                                                     </div>
