@@ -67,7 +67,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="assets/dist/js/pages/dashboard.js"></script>
 <script>
-  $(function() {
+  $(function () {
     // Summernote
     $('#summernote').summernote();
     $('.select2').select2()
@@ -92,6 +92,7 @@
       "responsive": true,
     });
   });
+
 </script>
 </body>
 
