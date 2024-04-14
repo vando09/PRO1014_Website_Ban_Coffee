@@ -1,126 +1,85 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Quản lý tài khoản</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item active">Quản lý tài khoản</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary">
-        <i class="fa-solid fa-plus me-3"></i>Thêm tài khoản
-      </button>
-    
-      <!-- /.container-fluid -->
-    </section>
-   
-    <!-- Main content -->
-    <section class="content">
+<?php
+$sql = "SELECT * FROM users";
+$result = mysqli_query($conn, $sql);
+if ($result && mysqli_num_rows($result) > 0) {
+    $userList = [];
 
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Danh sách tài khoản</h3>
+    while ($user = mysqli_fetch_assoc($result)) {
+        $userList[] = $user;
+    }
+}
+?>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Danh sách người dùng</h2>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <table id="example1" class="table table-bordered table-striped dataTable dtr-inline collapsed"
+                aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Browser: activate to sort column ascending">Tên người dùng</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending">Hình ảnh</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Platform(s): activate to sort column ascending">Email</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Engine version: activate to sort column ascending">Địa chỉ</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending">Loại tài khoản</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Hành động: activate to sort column ascending">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $stt = 1;
+                    foreach ($userList as $user):
+                        ?>
+                        <tr>
+                            <td>
+                                <?php echo $stt; ?>
+                            </td>
+                            <td>
+                                <?php echo $user["name"]; ?>
+                            </td>
+                            <td class="ser-thumbnail">
+                                <img src="./<?php echo $user["thumbnail"]; ?>" alt="user Thumbnail" class="h-25 w-25">
+                            </td>
+                            <td>
+                                <?php echo $user["email"]; ?>
+                            </td>
+                            <td>
+                                <?php echo $user["address"]; ?>
+                            </td>
+                            <td>
+                                <?php echo $user["role"] == 1 ? "Nhân viên" : "Khách hàng"; ?>
+                            </td>
+                            <td>
+                                <form action="/admin/?act=accounts&page=delete&id=<?php echo $user['id']; ?>"
+                                    method="POST" class="delete-form" id="deleteForm">
+                                    <button type="submit" name="delete" class="btn btn-danger m-2"><i
+                                            class='fas fa-trash-alt'></i></button>
+                                </form>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
+                                <a href="/admin/?act=accounts&page=edit&id=<?php echo $user['id']; ?>"
+                                    class="btn btn-warning m-2"><i class='fas fa-pencil-alt'></i></a>
+                            </td>
+                        </tr>
+                        <?php
+                        $stt++;
+                    endforeach;
+                    ?>
+                </tbody>
+            </table>
         </div>
-        
-        <div class="card-body p-0">
-          <table class="table table-striped projects">
-              <thead>
-                  <tr>
-                      <th style="width: 1%">
-                          #
-                      </th>
-                      <th>
-                        Email
-                      </th>
-                      <th style="width: 20%">
-                          Tên tài khoản
-                      </th>
-                      <th>
-                          Hình đại diện
-                      </th>
-                      
-                      <th>
-                          Loại tài khoản
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Trạng thái
-                      </th>
-                      <th style="width: 20%">
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>
-                          #
-                      </td>
-                      <td>
-                          <a>
-                              Alexander
-                          </a>
-                          <br/>
-                          <small>
-                              Ngày tạo 01.01.2019
-                          </small>
-                      </td>
-                      <td>
-                        examples@gmail.com
-                      </td>
-                      <td>
-                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                      </td>
-                      <td class="project_progress">
-                          Khách hàng
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success">Hoạt động</span>
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              Xem
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Sửa
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Xóa
-                          </a>
-                      </td>
-                  </tr>
-                 
-                 
-              </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
