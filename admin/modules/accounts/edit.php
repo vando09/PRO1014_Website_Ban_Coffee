@@ -16,27 +16,33 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['address'], $_POST['role'])) {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $address = $_POST['address'];
-        $role = $_POST['role'];
-        $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
-        move_uploaded_file(
-            $_FILES['thumbnail']['tmp_name'],
-            UPLOAD_URL . time() . $_FILES['thumbnail']['name']
-        );
-
-        $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, password = ?, address = ?, role = ?, thumbnail = ? WHERE id = ?");
-        $stmt->bind_param("ssssssi", $name, $email, $password, $address, $role, $thumbnail, $id);
-        if ($stmt->execute()) {
-            echo '<div class="alert alert-success" role="alert">
-            Sửa người dùng thành công!
+        if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['address']) || empty($_POST['role']) || empty($_FILES['thumbnail']['name'])) {
+            echo '<div class="alert alert-danger" role="alert">
+            Vui lòng điền đầy đủ thông tin người dùng!
             </div>';
         } else {
-            echo '<div class="alert alert-danger" role="alert">
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $address = $_POST['address'];
+            $role = $_POST['role'];
+            $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
+            move_uploaded_file(
+                $_FILES['thumbnail']['tmp_name'],
+                UPLOAD_URL . time() . $_FILES['thumbnail']['name']
+            );
+
+            $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, password = ?, address = ?, role = ?, thumbnail = ? WHERE id = ?");
+            $stmt->bind_param("ssssssi", $name, $email, $password, $address, $role, $thumbnail, $id);
+            if ($stmt->execute()) {
+                echo '<div class="alert alert-success" role="alert">
+            Sửa người dùng thành công!
+            </div>';
+            } else {
+                echo '<div class="alert alert-danger" role="alert">
             Sửa người dùng thất bại!
             </div>';
+            }
         }
     }
 }
@@ -102,17 +108,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="thumbnail" class="custom-file-input"
-                                                id="thumbnail"   value="<?php echo isset($editUser['thumbnail']) ? $editUser['thumbnail'] : ''; ?>">
+                                            <input type="file" name="thumbnail" class="custom-file-input" id="thumbnail"
+                                                value="<?php echo isset($editUser['thumbnail']) ? $editUser['thumbnail'] : ''; ?>">
                                             <label class="custom-file-label" for="thumbnail">Choose file</label>
                                         </div>
-                                        
+
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
-                                        
+
                                     </div>
-                                    <img src="<?php echo $editUser['thumbnail']; ?>" alt="Old Thumbnail" width="100" class = "mt-3">
+                                    <!-- <img src="<?php echo $editUser['thumbnail']; ?>" alt="Old Thumbnail" width="100" class = "mt-3"> -->
 
                                 </div>
                             </div>

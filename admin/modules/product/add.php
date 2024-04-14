@@ -1,28 +1,36 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $sale = $_POST['sale'];
-    $description = $_POST['description'];
-    $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
-    move_uploaded_file(
-        $_FILES['thumbnail']['tmp_name'],
-        UPLOAD_URL . time() . $_FILES['thumbnail']['name']
-    );
+    if (empty($_POST['name']) || empty($_POST['price']) || empty($_POST['description']) || empty($_POST['category_id']) || empty($_FILES['thumbnail']['name'])) {
+        echo '<div class="alert alert-danger" role="alert">
+       Vui lòng điền đầy đủ thông tin sản phẩm!
+       </div>';
+    } else {
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $sale = $_POST['sale'];
+        $description = $_POST['description'];
+        $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
+        move_uploaded_file(
+            $_FILES['thumbnail']['tmp_name'],
+            UPLOAD_URL . time() . $_FILES['thumbnail']['name']
+        );
 
-    $stmt = $conn->prepare("INSERT INTO products (name, price, sale, thumbnail, description, category_id) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssi", $name, $price, $sale, $thumbnail, $description, $_POST['category_id']);
+        $stmt = $conn->prepare("INSERT INTO products (name, price, sale, thumbnail, description, category_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssi", $name, $price, $sale, $thumbnail, $description, $_POST['category_id']);
 
-    if ($stmt->execute()) {
-        echo '<div class="alert alert-success" role="alert">
+        if ($stmt->execute()) {
+            echo '<div class="alert alert-success" role="alert">
    Thêm sản phẩm thành công!
 </div>';
-    } else {
-        echo '<div class="alert alert-danger" role="alert">
-       Thêm sản phẩm thất bại!
-      </div>';
+        } else {
+            echo '<div class="alert alert-danger" role="alert">
+        Thêm sản phẩm thất bại!
+        </div>';
+        }
     }
+
 }
+
 ?>
 
 <section class="content">

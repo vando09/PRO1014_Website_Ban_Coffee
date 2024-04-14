@@ -63,7 +63,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                             </td>
                             <td>
                                 <form action="/admin/?act=accounts&page=delete&id=<?php echo $user['id']; ?>"
-                                    method="POST" class="delete-form" id="deleteForm">
+                                    method="POST" class="delete-form" id="deleteForm"
+                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
                                     <button type="submit" name="delete" class="btn btn-danger m-2"><i
                                             class='fas fa-trash-alt'></i></button>
                                 </form>

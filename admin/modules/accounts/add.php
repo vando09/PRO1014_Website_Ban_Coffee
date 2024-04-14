@@ -1,30 +1,36 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = $_POST["name"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-  $address = $_POST["address"];
-  $role = $_POST["role"]; 
+  if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['address']) || empty($_POST['role']) || empty($_FILES['thumbnail']['name'])) {
+    echo '<div class="alert alert-danger" role="alert">
+    Vui lòng điền đầy đủ thông tin người dùng!
+    </div>';
+  } else {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $address = $_POST["address"];
+    $role = $_POST["role"];
 
-  $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
-  move_uploaded_file(
-    $_FILES['thumbnail']['tmp_name'],
-    UPLOAD_URL . time() . $_FILES['thumbnail']['name']
-  );
+    $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
+    move_uploaded_file(
+      $_FILES['thumbnail']['tmp_name'],
+      UPLOAD_URL . time() . $_FILES['thumbnail']['name']
+    );
 
-  $stmt = $conn->prepare("INSERT INTO users (name, email, password, address, thumbnail, role)
-          VALUES (?,?,?,?,?,?)"); 
-          $stmt->bind_param("sssssi",$name,$email,$password,$address,$thumbnail,$role);    
-          if($stmt->execute()){
-            echo '<div class="alert alert-success" role="alert">
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, address, thumbnail, role)
+          VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("sssssi", $name, $email, $password, $address, $thumbnail, $role);
+    if ($stmt->execute()) {
+      echo '<div class="alert alert-success" role="alert">
             Thêm người dùng thành công!
          </div>';
-             } else {
-                 echo '<div class="alert alert-danger" role="alert">
+    } else {
+      echo '<div class="alert alert-danger" role="alert">
                 Thêm người dùng thất bại!
                </div>';
-             }
-          }
+    }
+  }
+}
 ?>
 
 
@@ -64,9 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
               <label for="role">Loại tài khoản</label>
               <select id="role" name="role" class="form-control custom-select">
-              <option value="1">Admin</option>
-              <option value="2">Khách hàng</option>
-            </select>
+                <option value="1">Admin</option>
+                <option value="2">Khách hàng</option>
+              </select>
             </div>
             <div class="input-group">
               <div class="custom-file">

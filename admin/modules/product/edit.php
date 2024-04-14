@@ -14,6 +14,11 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['name'], $_POST['price'], $_POST['sale'], $_POST['description'], $_POST['category_id'], $_FILES['thumbnail'])) {
+        if (empty($_POST['name']) || empty($_POST['price']) || empty($_POST['description']) || empty($_POST['category_id']) || empty($_FILES['thumbnail']['name'])) {
+            echo '<div class="alert alert-danger" role="alert">
+           Vui lòng điền đầy đủ thông tin sản phẩm!
+           </div>';
+        } else {
         $name = $_POST['name'];
         $price = $_POST['price'];
         $sale = $_POST['sale'];
@@ -37,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>';
         }
     }
+}
 }
 
 ?>
