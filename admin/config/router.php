@@ -39,7 +39,6 @@ if (!empty($act)) {
                     
                 }
             } else if (!empty($page) && $page == 'delete') {
-                require "modules/categories/delete.php";
 
 
             } else {
