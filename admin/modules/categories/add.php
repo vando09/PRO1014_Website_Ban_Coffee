@@ -1,8 +1,10 @@
 <?php
-
 if (isset($_POST['addProduct'])) {
     $nameCat = $_POST['name'];
     $imageFiles = $_FILES['image'];
+
+    $err_name = "";
+    $err_image = "";
 
     if (empty($nameCat)) {
         $err_name = "tên danh mục không được bỏ trống";
@@ -33,14 +35,13 @@ if (isset($_POST['addProduct'])) {
         } else {
             echo "Lỗi file hình ảnh";
         }
-        
-        header("Location:/admin/?act=categories&page=list");
     }
+} else {
+    $nameCat = "";
 }
 
 $conn->close();
 ?>
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -53,23 +54,36 @@ $conn->close();
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-9">
-                                    <div class="form-group"> <label for="name">Tên sản phẩm</label> <input type="text" name="name" class="form-control" id="name" placeholder="Nhập tên sản phẩm"> </div>
+                                    <div class="form-group">
+                                        <label for="name">Tên sản phẩm</label>
+                                        <input type="text" name="name" class="form-control <?php echo (!empty($err_name)) ? 'is-invalid' : ''; ?>" id="name" placeholder="Nhập tên sản phẩm" value="<?php echo $nameCat; ?>">
+                                        <div class="invalid-feedback">
+                                            <?php echo $err_name; ?>
+                                        </div>
+                                    </div>
                                     <div class="card card-info">
                                         <div class="card-body">
-                                            <div class="form-group"> <label for="image">Hình ảnh</label>
+                                            <div class="form-group">
+                                                <label for="image">Hình ảnh</label>
                                                 <div class="input-group">
-                                                    <div class="custom-file"> <input type="file" name="image[]" class="custom-file-input" id="image" multiple> <label class="custom-file-label" for="image">Choose file</label> </div>
-                                                    <div class="input-group-append"> <span class="input-group-text">Upload</span> </div>
+                                                    <div class="custom-file">
+                                                   <input type="file" name="image[]" class="custom-file-input" id="image" multiple> <label class="custom-file-label" for="image">Choose file</label> </div>
+                                                        <label class="custom-file-label" for="image">Choose file</label>
+                                                    
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>
-                            <div class="col-xl-3"> <button type="submit" name="addProduct" class="btn btn-primary">Thêm</button> </div>
+                            <div class="col-xl-3">
+                                <button type="submit" name="addProduct" class="btn btn-primary">Thêm</button>
+                            </div>
                         </div>
-                        
                     </form>
                 </div>
             </div>
