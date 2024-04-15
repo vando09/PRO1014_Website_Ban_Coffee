@@ -36,6 +36,7 @@ if (!empty($act)) {
                 if (sizeof($_POST) === 0) {
                     require "modules/categories/update.php";
                 }else {
+                    require "modules/categories/update.php";
                     
                 }
             } else if (!empty($page) && $page == 'delete') {

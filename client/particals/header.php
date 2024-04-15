@@ -11,8 +11,7 @@
 	<meta name="keywords" content="bootstrap, bootstrap4" />
 
 	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 	<link href="../client/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -27,8 +26,7 @@
 		<div class="container">
 			<a class="navbar-brand" href="../index.html">Furni<span>.</span></a>
 
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
-				aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -41,12 +39,19 @@
 					<li><a class="nav-link" href="/client/abouts.php">Về chúng tôi</a></li>
 					<!-- <li><a class="nav-link" href="/client/blog.php">Bài viết</a></li> -->
 					<li><a class="nav-link" href="/client/contact.php">Liên hệ </a></li>
+					<form class="d-flex" action="/client/single_product.php" method="GET" role="search">
+						<input type="text" name="keyword" class="form-control me-2" placeholder="Tìm kiếm...">
+						<button type="submit" class="btn btn-outline-success">Tìm </button>
+					</form>
+					
 				</ul>
 
-				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+				<ul class="custom-navbar-cta navbar-nav mb-3 mb-md-0 ms-5">
 					<li><a class="nav-link" href="/client/sign_in.php"><img src="../client/assets/images/user.svg"></a></li>
 					<li><a class="nav-link" href="/client/cart.php"><img src="../client/assets/images/cart.svg"></a>
+
 					</li>
+					
 				</ul>
 			</div>
 		</div>

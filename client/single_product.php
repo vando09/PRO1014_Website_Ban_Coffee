@@ -1,5 +1,37 @@
-<?php include "../client/particals/header.php" ?>
+
 <?php
+define('UPLOAD_URL', 'images/');
+include "../client/particals/header.php";
+
+require_once "models/database.php";
+$db = new Database();
+$conn = $db->getDatabase();
+
+if (isset($_GET['keyword'])) {
+	$keyword = $_GET['keyword'];
+	$search_query = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+	$result = mysqli_query($conn, $search_query);
+	if (mysqli_num_rows($result) > 0) {
+		echo "<div class='row'>";
+		while ($row = mysqli_fetch_assoc($result)) {
+			$thumbnail = UPLOAD_URL . $row['thumbnail']; 
+			echo "<div class='col-12 col-md-6 col-lg-4 mb-4'>";
+			echo "<div class='card'>";
+			echo "<img src='/admin/" . $row['thumbnail'] . "' alt='" . $row['name'] . "' class='card-img-top' />";
+			echo "<div class='card-body'>";
+			echo "<h5 class='card-title'>" . $row['name'] . "</h5>";
+			echo "<p class='card-text'>" . $row['description'] . "</p>";
+			echo "<p class='card-text'> " . $row['price'] . "</p>";
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+		}
+		echo "</div>";
+    
+	} else {
+		echo "Không tìm thấy sản phẩm";
+	}
+}
 require_once "models/database.php";
 $db = new Database();
 $conn = $db->getDatabase();
