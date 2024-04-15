@@ -1,50 +1,76 @@
 <?php
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
 include "../client/particals/header.php";
-// if (session_start() === 1) {
-//     session_start();
-// }
-// if (isset($_SESSION['user'])) {
-//     header("location: index.php");
-// }
-// if (isset($_POST['password']) && strlen($_POST['password']) > 0) {
-//     require "./models/user.php";
+require_once "models/database.php";
+$db = new Database();
+$conn = $db->getDatabase();
 
-//     $password = $_POST['password'];
-//     $email = $_POST['email'];
+if (isset($_POST['login'])) {
+    $name = $_POST['name'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
 
-//     $result = checkUserExits(trim($email));
+    $err_name = '';
+    $err_password = '';
+    $err_email = '';
 
-//     if ($result->num_rows > 0) {
-//         $user = $result->fetch_assoc();
-//         if (password_verify($password, $user['password'])) {
-//             $_SESSION['user'] = $user;
+    if (empty($name)) {
+        $err_name = "Vui lòng không để trống tên đăng nhập !!!";
+    }
 
-//             header("location: index.php");
-//         } else {
-//             $_SESSION['email_error'] = "tài khoản hoặc mật khẩu không đúng";
-//         }
+    if (empty($password)) {
+        $err_password = "Vui lòng không để trống mật khẩu !!!";
+    }
 
-//     } else {
-//         $_SESSION['email_error'] = "Tài khoản hoặc mật khẩu chưa đúng!";
-//     }
-// }
+    if (empty($email)) {
+        $err_email = "Vui lòng không để trống email !!!";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $err_email = "Email không hợp lệ !!!";
+    }
 
+    if (!isset($err_name) && !isset($err_password) && !isset($err_email)) {
+        $select = "SELECT * FROM users WHERE name='$name' AND password='$password' AND email='$email'";
+        $result = $conn->query($select);
+
+        if ($result->num_rows > 0) {
+
+            if ($result->fetch_assoc()['role'] == 'user') {
+                header("Location:./admin/ ");
+              }else{
+               header("Location: ");
+             }
+        } else {
+            $err = "Tài khoản, mật khẩu hoặc email sai !!!";
+        }
+    }
+}
 ?>
+<a href=""></a>
+
 <div class="content" style="margin-top: 88px;">
     <div class="container rounded" style="padding-top: 50px; padding-bottom: 50px">
         <div class="bg-white">
             <div class="row align-items-center">
                 <div class="col-md-12 border-right">
                     <form action="" method="post" class="px-3 pe-lg-5 py-5 sign-in-form">
+
                         <div class="alert alert-danger border-0 p-0 text-center">
+                            <?= isset($err_name) ? $err_name : '' ?>
+                            <?= isset($err_password) ? $err_password : '' ?>
+                            <?= isset($err_email) ? $err_email : '' ?>
+                            <?= isset($err) ? $err : '' ?>
                         </div>
+
                         <div class="alert alert-success border-0 p-0 text-center">
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Đăng nhập</h4>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label class="labels">Tên</label><input type="name" class="form-control"
+                                    name="name" placeholder="Nhập tên tại đây">
+                                <p class="field-message mb-0"></p>
+                            </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-12">
@@ -66,9 +92,10 @@ include "../client/particals/header.php";
                         </div>
                         <div class="mt-3 text-center">
                             <button class="btn btn-primary profile-button" style="background-color: #333"
-                                name="submit-btn">
+                            name="login">
                                 Đăng nhập
                             </button>
+                        </div>
                         </div>
                         <div class="text-center p-t-136">
                             <a class="txt2" href="dang-ky">
@@ -81,12 +108,7 @@ include "../client/particals/header.php";
                 </div>
                 <div class="card-footer">
                     <div class="text-danger">
-                        <!-- <?php
-                        if (isset($_SESSION['email_error'])) {
-                            echo $_SESSION['email_error'];
-                            unset($_SESSION['email_error']);
-                        }
-                        ?> -->
+
                     </div>
                 </div>
             </div>
