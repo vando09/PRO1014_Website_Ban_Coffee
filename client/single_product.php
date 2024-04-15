@@ -20,8 +20,7 @@ if (isset($_GET['keyword'])) {
 			echo "<img src='/admin/" . $row['thumbnail'] . "' alt='" . $row['name'] . "' class='card-img-top' />";
 			echo "<div class='card-body'>";
 			echo "<h5 class='card-title'>" . $row['name'] . "</h5>";
-			echo "<p class='card-text'>" . $row['description'] . "</p>";
-			echo "<p class='card-text'> " . $row['price'] . "</p>";
+			echo "<p class='card-text'> " . $row['price'] .' '. 'VND'.  "</p>";
 			echo "</div>";
 			echo "</div>";
 			echo "</div>";
