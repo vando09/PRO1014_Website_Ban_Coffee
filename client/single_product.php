@@ -1,4 +1,3 @@
-
 <?php
 define('UPLOAD_URL', 'images/');
 include "../client/particals/header.php";
@@ -8,45 +7,42 @@ $db = new Database();
 $conn = $db->getDatabase();
 
 if (isset($_GET['keyword'])) {
-	$keyword = $_GET['keyword'];
-	$search_query = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
-	$result = mysqli_query($conn, $search_query);
-	if (mysqli_num_rows($result) > 0) {
-		echo "<div class='row'>";
-		while ($row = mysqli_fetch_assoc($result)) {
-			$thumbnail = UPLOAD_URL . $row['thumbnail']; 
-			echo "<div class='col-12 col-md-6 col-lg-4 mb-4'>";
-			echo "<div class='card'>";
-			echo "<img src='/admin/" . $row['thumbnail'] . "' alt='" . $row['name'] . "' class='card-img-top' />";
-			echo "<div class='card-body'>";
-			echo "<h5 class='card-title'>" . $row['name'] . "</h5>";
-			echo "<p class='card-text'> " . $row['price'] .' '. 'VND'.  "</p>";
-			echo "</div>";
-			echo "</div>";
-			echo "</div>";
-		}
-		echo "</div>";
-    
-	} else {
-		echo "Không tìm thấy sản phẩm";
-	}
+  $keyword = $_GET['keyword'];
+  $search_query = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+  $result = mysqli_query($conn, $search_query);
+  if (mysqli_num_rows($result) > 0) {
+    echo "<div class='row'>";
+    while ($row = mysqli_fetch_assoc($result)) {
+      $thumbnail = UPLOAD_URL . $row['thumbnail'];
+      echo "<div class='col-12 col-md-6 col-lg-4 mb-4'>";
+      echo "<div class='card'>";
+      echo "<img src='/admin/" . $row['thumbnail'] . "' alt='" . $row['name'] . "' class='card-img-top' />";
+      echo "<div class='card-body'>";
+      echo "<h5 class='card-title'>" . $row['name'] . "</h5>";
+      echo "<p class='card-text'> " . $row['price'] . ' ' . 'VND' . "</p>";
+      echo "</div>";
+      echo "</div>";
+      echo "</div>";
+    }
+    echo "</div>";
+
+  } else {
+    echo "Không tìm thấy sản phẩm";
+  }
 }
-require_once "models/database.php";
-$db = new Database();
-$conn = $db->getDatabase();
 $sql = "SELECT * FROM products";
 $result = mysqli_query($conn, $sql);
 if ($result && mysqli_num_rows($result) > 0) {
-	$productList = [];
+  $productList = [];
 
-	while ($product = mysqli_fetch_assoc($result)) {
-		$productList[] = $product;
-	}
+  while ($product = mysqli_fetch_assoc($result)) {
+    $productList[] = $product;
+  }
 }
 ?>
 <div class="container">
   <div class="row d-flex justify-content-end">
-  <!-- <div class="col-xl-3 mt-xl-5">
+    <!-- <div class="col-xl-3 mt-xl-5">
   <div class="col-lg-12">
     <button class="btn btn-outline-secondary mb-3 w-100 d-lg-none" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true"

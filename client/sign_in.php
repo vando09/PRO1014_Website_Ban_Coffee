@@ -34,10 +34,11 @@ if (isset($_POST['login'])) {
         if ($result->num_rows > 0) {
 
             if ($result->fetch_assoc()['role'] == 'user') {
+                echo "đăng nhập thành công";
                 header("Location:./admin/ ");
-              }else{
-               header("Location: ");
-             }
+            } else {
+                header("Location: ");
+            }
         } else {
             $err = "Tài khoản, mật khẩu hoặc email sai !!!";
         }
@@ -67,8 +68,8 @@ if (isset($_POST['login'])) {
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <label class="labels">Tên</label><input type="name" class="form-control"
-                                    name="name" placeholder="Nhập tên tại đây">
+                                <label class="labels">Tên</label><input type="name" class="form-control" name="name"
+                                    placeholder="Nhập tên tại đây">
                                 <p class="field-message mb-0"></p>
                             </div>
                         </div>
@@ -91,28 +92,27 @@ if (isset($_POST['login'])) {
                             <a class="txt2" href="quen-mat-khau">mật khẩu?</a>
                         </div>
                         <div class="mt-3 text-center">
-                            <button class="btn btn-primary profile-button" style="background-color: #333"
-                            name="login">
+                            <button class="btn btn-primary profile-button" style="background-color: #333" name="login">
                                 Đăng nhập
                             </button>
                         </div>
-                        </div>
-                        <div class="text-center p-t-136">
-                            <a class="txt2" href="dang-ky">
-                                Tạo tài khoản
-                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                            </a>
-                        </div>
-
-                    </form>
                 </div>
-                <div class="card-footer">
-                    <div class="text-danger">
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="sign_up.php">
+                        Tạo tài khoản
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
 
-                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="text-danger">
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <?php include "../client/particals/footer.php"; ?>
+<?php include "../client/particals/footer.php"; ?>
