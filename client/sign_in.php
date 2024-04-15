@@ -9,27 +9,28 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
     $email = $_POST['email'];
 
-    $err_name = '';
-    $err_password = '';
-    $err_email = '';
+    $errors = [];
 
     if (empty($name)) {
-        $err_name = "Vui lòng không để trống tên đăng nhập !!!";
+        $errors[] = "Vui lòng không để trống tên đăng nhập !!!";
     }
 
     if (empty($password)) {
-        $err_password = "Vui lòng không để trống mật khẩu !!!";
+        $errors[] = "Vui lòng không để trống mật khẩu !!!";
     }
 
     if (empty($email)) {
-        $err_email = "Vui lòng không để trống email !!!";
+        $errors[] = "Vui lòng không để trống email !!!";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $err_email = "Email không hợp lệ !!!";
+        $errors[] = "Email không hợp lệ !!!";
     }
 
-    if (!isset($err_name) && !isset($err_password) && !isset($err_email)) {
-        $select = "SELECT * FROM users WHERE name='$name' AND password='$password' AND email='$email'";
-        $result = $conn->query($select);
+    if (empty($errors)) {
+        $select = "SELECT * FROM users WHERE name=? AND email=? AND password=?";
+        $stmt = $conn->prepare($select);
+        $stmt->bind_param("sss", $name, $email, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
 
@@ -39,13 +40,15 @@ if (isset($_POST['login'])) {
             } else {
                 header("Location: ");
             }
+            // session_start();
+            $_SESSION['user'] = $result->fetch_assoc()['id'];
+            header("Location: ../index.php");
         } else {
-            $err = "Tài khoản, mật khẩu hoặc email sai !!!";
+            $errors[] = "Tài khoản, mật khẩu hoặc email sai !!!";
         }
     }
 }
 ?>
-<a href=""></a>
 
 <div class="content" style="margin-top: 88px;">
     <div class="container rounded" style="padding-top: 50px; padding-bottom: 50px">
@@ -53,12 +56,10 @@ if (isset($_POST['login'])) {
             <div class="row align-items-center">
                 <div class="col-md-12 border-right">
                     <form action="" method="post" class="px-3 pe-lg-5 py-5 sign-in-form">
-
                         <div class="alert alert-danger border-0 p-0 text-center">
-                            <?= isset($err_name) ? $err_name : '' ?>
-                            <?= isset($err_password) ? $err_password : '' ?>
-                            <?= isset($err_email) ? $err_email : '' ?>
-                            <?= isset($err) ? $err : '' ?>
+
+
+
                         </div>
 
                         <div class="alert alert-success border-0 p-0 text-center">
