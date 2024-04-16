@@ -48,6 +48,7 @@ if (isset($_POST['login'])) {
         }
     }
 }
+var_dump($result);
 ?>
 
 <div class="content" style="margin-top: 88px;">
