@@ -16,33 +16,27 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['address'], $_POST['role'])) {
-        if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['address']) || empty($_POST['role']) || empty($_FILES['thumbnail']['name'])) {
-            echo '<div class="alert alert-danger" role="alert">
-            Vui lòng điền đầy đủ thông tin người dùng!
-            </div>';
-        } else {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $address = $_POST['address'];
-            $role = $_POST['role'];
-            $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
-            move_uploaded_file(
-                $_FILES['thumbnail']['tmp_name'],
-                UPLOAD_URL . time() . $_FILES['thumbnail']['name']
-            );
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $address = $_POST['address'];
+        $role = $_POST['role'];
+        $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
+        move_uploaded_file(
+            $_FILES['thumbnail']['tmp_name'],
+            UPLOAD_URL . time() . $_FILES['thumbnail']['name']
+        );
 
-            $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, password = ?, address = ?, role = ?, thumbnail = ? WHERE id = ?");
-            $stmt->bind_param("ssssssi", $name, $email, $password, $address, $role, $thumbnail, $id);
-            if ($stmt->execute()) {
-                echo '<div class="alert alert-success" role="alert">
+        $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, password = ?, address = ?, role = ?, thumbnail = ? WHERE id = ?");
+        $stmt->bind_param("ssssssi", $name, $email, $password, $address, $role, $thumbnail, $id);
+        if ($stmt->execute()) {
+            echo '<div class="alert alert-success" role="alert">
             Sửa người dùng thành công!
             </div>';
-            } else {
-                echo '<div class="alert alert-danger" role="alert">
+        } else {
+            echo '<div class="alert alert-danger" role="alert">
             Sửa người dùng thất bại!
             </div>';
-            }
         }
     }
 }
@@ -118,8 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
 
                                     </div>
-                                    <!-- <img src="<?php echo $editUser['thumbnail']; ?>" alt="Old Thumbnail" width="100" class = "mt-3"> -->
-
                                 </div>
                             </div>
                         </div>

@@ -25,8 +25,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Browser: activate to sort column ascending">Tên người dùng</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending">Hình ảnh</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Engine version: activate to sort column ascending">Hình ảnh</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Email</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -62,12 +62,14 @@ if ($result && mysqli_num_rows($result) > 0) {
                                 <?php echo $user["role"] == 1 ? "Nhân viên" : "Khách hàng"; ?>
                             </td>
                             <td>
-                                <form action="/admin/?act=accounts&page=delete&id=<?php echo $user['id']; ?>"
-                                    method="POST" class="delete-form" id="deleteForm"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
-                                    <button type="submit" name="delete" class="btn btn-danger m-2"><i
-                                            class='fas fa-trash-alt'></i></button>
-                                </form>
+                                <?php if ($user["role"] != 1): ?>
+                                    <form action="/admin/?act=accounts&page=delete&id=<?php echo $user['id']; ?>" method="POST"
+                                        class="delete-form" id="deleteForm"
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                        <button type="submit" name="delete" class="btn btn-danger m-2"><i
+                                                class='fas fa-trash-alt'></i></button>
+                                    </form>
+                                <?php endif; ?>
 
                                 <a href="/admin/?act=accounts&page=edit&id=<?php echo $user['id']; ?>"
                                     class="btn btn-warning m-2"><i class='fas fa-pencil-alt'></i></a>

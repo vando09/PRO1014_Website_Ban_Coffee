@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['act']) && $_GET['act']
             echo '<div class="alert alert-success" role="alert">
                     Xóa người dùng thành công!
                 </div>';
+            header("location: /admin/?act=accounts&page=list");
         } else {
             echo '<div class="alert alert-danger" role="alert">
                     Xóa người dùng thất bại!

@@ -1,39 +1,54 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 include "../client/particals/header.php";
 require_once "models/database.php";
 $db = new Database();
 $conn = $db->getDatabase();
+define('UPLOAD_URL', '../admin/images/');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['address']) || empty($_FILES['thumbnail']['name'])) {
-        echo '<div class="alert alert-danger" role="alert">
-      Vui lòng điền đầy đủ thông tin !
+    if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['address']) || empty($_POST['role']) || empty($_FILES['thumbnail']['name'])) {
+      echo '<div class="alert alert-danger" role="alert">
+      Vui lòng điền đầy đủ thông tin người dùng!
       </div>';
     } else {
-        $name = $_POST["name"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $address = $_POST["address"];
-
+      $name = $_POST["name"];
+      $email = $_POST["email"];
+      $password = $_POST["password"];
+      $address = $_POST["address"];
+      $role = $_POST["role"];
+  
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<div class="alert alert-danger" role="alert">
+            Email không hợp lệ!
+        </div>';
+      } elseif (strlen($password) < 6) {
+        echo '<div class="alert alert-danger" role="alert">
+            Mật khẩu phải có ít nhất 6 ký tự!
+        </div>';
+      } else {
         $thumbnail = UPLOAD_URL . time() . $_FILES['thumbnail']['name'];
         move_uploaded_file(
-            $_FILES['thumbnail']['tmp_name'],
-            UPLOAD_URL . time() . $_FILES['thumbnail']['name']
+          $_FILES['thumbnail']['tmp_name'],
+          UPLOAD_URL . time() . $_FILES['thumbnail']['name']
         );
-
-        $stmt = $conn->prepare("INSERT INTO users (name, email, password, address, thumbnail)
+  
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password, address, role, thumbnail)
             VALUES (?,?,?,?,?,?)");
-        $stmt->bind_param("sssssi", $name, $email, $password, $address, $thumbnail);
+        $stmt->bind_param("ssssis", $name, $email, $password, $address, $role, $thumbnail);
+  
         if ($stmt->execute()) {
-            echo '<div class="alert alert-success" role="alert">
-              Thêm người dùng thành công!
-           </div>';
+          header("Location: sign_in.php?success=1");
+          exit;
         } else {
-            echo '<div class="alert alert-danger" role="alert">
-                  Thêm người dùng thất bại!
-                 </div>';
+          echo '<div class="alert alert-danger" role="alert">
+                Đăng ký thất bại!
+            </div>';
         }
+      }
     }
-}
+  }
 ?>
 <div class="content mt-5 mb-5">
     <div class="container rounded">
@@ -42,11 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-md-12 border-right">
                     <div class="alert alert-success border-0 p-0 text-center">
                     </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Đăng ký</h4>
-                    </div>
+                    
                     <form id="quickForm" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
                         <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-centermb-3">
+                            <h4 class="text-right">Đăng kí</h4>
+                        </div>
                             <div class="form-group">
                                 <label for="name">Tên tài khoản</label>
                                 <input type="text" id="name" name="name" class="form-control" value="">
@@ -78,12 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </form>
 
-                </div>
-                <div class="text-center p-t-136">
-                    <a class="txt2" href="dang-ky">
-                        Tạo tài khoản
-                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    </a>
                 </div>
 
             </div>

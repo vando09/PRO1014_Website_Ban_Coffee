@@ -1,12 +1,10 @@
 <?php
 session_start();
-include "models/database.php";
-$db = new Database();
-$conn = $db->getDatabase();
-
 if (isset($_SESSION['user'])) {
-	$user = $_SESSION['user'];
-	$_SESSION['user_name'] = $user['name'];
+    $user = $_SESSION['user'];
+    echo '<div class="alert alert-success" role="alert">
+        Đăng nhập thành công! Xin chào, ' . $user['name'] . '!
+    </div>';
 }
 ?>
 <!doctype html>
@@ -28,7 +26,7 @@ if (isset($_SESSION['user'])) {
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<link href="../client/assets/css/tiny-slider.css" rel="stylesheet">
 	<link href="../client/assets/css/style.css" rel="stylesheet">
-	<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+	<title>COFFEESHOP</title>
 </head>
 
 <body>
