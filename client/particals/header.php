@@ -1,3 +1,14 @@
+<?php
+session_start();
+include "models/database.php";
+$db = new Database();
+$conn = $db->getDatabase();
+
+if (isset($_SESSION['user'])) {
+	$user = $_SESSION['user'];
+	$_SESSION['user_name'] = $user['name'];
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -47,7 +58,19 @@
 				</ul>
 
 				<ul class="custom-navbar-cta navbar-nav mb-3 mb-md-0 ms-5">
-					<li><a class="nav-link" href="/client/sign_in.php"><img src="../client/assets/images/user.svg"></a></li>
+					<li>
+						<a class="nav-link" href="/client/sign_in.php"  onclick="logout()">
+							<?php
+							if (isset($_SESSION['user_name'])) {
+								echo $_SESSION['user_name'];
+							} else {
+								echo '<img src="../client/assets/images/user.svg">';
+							}
+							?>
+						</a>
+					</li>
+				
+					
 					<li><a class="nav-link" href="/client/cart.php"><img src="../client/assets/images/cart.svg"></a>
 
 					</li>
@@ -57,6 +80,4 @@
 		</div>
 
 	</nav>
-	<?php
-	
-	?>
+
