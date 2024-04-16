@@ -13,7 +13,7 @@ if (isset($_POST['addProduct'])) {
     }
 
     if (empty($imageFiles['name'][0])) {
-        $err_image = "vui lòng chọn hình ảnh sản phẩm";
+        $err_image = "vui lòng chọn hình ảnh danh mục";
     } else {
         $err_image = "";
     }
@@ -55,7 +55,7 @@ $conn->close();
                             <div class="row">
                                 <div class="col-xl-9">
                                     <div class="form-group">
-                                        <label for="name">Tên sản phẩm</label>
+                                        <label for="name">Tên Danh mục</label>
                                         <input type="text" name="name" class="form-control <?php echo (!empty($err_name)) ? 'is-invalid' : ''; ?>" id="name" placeholder="Nhập tên sản phẩm" value="<?php echo $nameCat; ?>">
                                         <div class="invalid-feedback">
                                             <?php echo $err_name; ?>
@@ -68,10 +68,10 @@ $conn->close();
                                                 <div class="input-group">
                                                     <div class="custom-file">
                                                    <input type="file" name="image[]" class="custom-file-input" id="image" multiple> <label class="custom-file-label" for="image">Choose file</label> </div>
-                                                        <label class="custom-file-label" for="image">Choose file</label>
+                                                        <label class="custom-file-label" for="image">Chọn ảnh</label>
                                                     
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">Upload</span>
+                                                        <span class="input-group-text">Tải len</span>
                                                     </div>
                                                 </div>
                                             </div>
